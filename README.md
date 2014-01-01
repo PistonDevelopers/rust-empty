@@ -13,6 +13,7 @@ Rust is a programming language developed at Mozilla Research.
 <a href="https://github.com/mozilla/rust/wiki/Docs" target="_blank">Documentation at Github Wiki</a>  
 <a href="http://www.reddit.com/r/rust/" target="_blank">Rust at Reddit</a>  
 <a href="http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust" target="_blank">Rust IRC Channel</a>  
+<a href="https://github.com/mozilla/rust/wiki/Doc-packages%2C-editors%2C-and-other-tools" target="_blank">Editor Syntax Highlighting</a>
 
 ###Using The Terminal
 
@@ -24,11 +25,35 @@ Mac OSX fine, but GNU/Linux is recommended (free software / open source).
 
 Some useful commands:
 
-    cd <dir>          Step into sub directory.
-    cd ..             Step up one directory.
-    mv <from> <to>    Move file from one location to another.
-    pwd               Prints the current directory.
-    vim <file>        Open file in text editor.
+    ./<exe>             Run program.
+    cd <dir>            Step into sub directory.
+    cd ..               Step up one directory.
+    ls                  List all visible files and folders in directory.
+    ls -a               List all files, including those starting with '.'.
+    mv <from> <to>      Move file from one location to another.
+    mkdir <dir>         Create new directory.
+    pwd                 Prints the current directory.
+    vim <file>          Open file in text editor.
+    xdg-open .          Open current directory in window.
+    (up/down arrow)     Browse command history.
+
+###Using Vim
+
+Vim is a text editor that can be used in the terminal window.  
+It starts in a read-only mode.  
+When you enter a mode you can go back using Esc.  
+
+    :!<command>         Execute terminal command.
+    :w                  Save file.
+    :q                  Quit.
+    i                   Edit text.
+    u                   Undo.
+    Ctrl+r              Redo.
+    p                   Paste copied text.
+    v                   Select text.
+        d               Cut selected text.
+        y               Copy selected text.
+        
 
 ###Installation
 
