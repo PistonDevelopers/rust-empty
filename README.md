@@ -13,7 +13,8 @@ Rust is a programming language developed at Mozilla Research.
 <a href="https://github.com/mozilla/rust/wiki/Docs" target="_blank">Documentation at Github Wiki</a>  
 <a href="http://www.reddit.com/r/rust/" target="_blank">Rust at Reddit</a>  
 <a href="http://chat.mibbit.com/?server=irc.mozilla.org&channel=%23rust" target="_blank">Rust IRC Channel</a>  
-<a href="https://github.com/mozilla/rust/wiki/Doc-packages%2C-editors%2C-and-other-tools" target="_blank">Editor Syntax Highlighting</a>
+<a href="https://github.com/mozilla/rust/wiki/Doc-packages%2C-editors%2C-and-other-tools" target="_blank">Editor Syntax Highlighting</a>  
+<a href="https://github.com/mozilla/rust/wiki/Rustpkg" target="_blank">Rust Packages</a>  
 
 ###Using The Terminal
 
