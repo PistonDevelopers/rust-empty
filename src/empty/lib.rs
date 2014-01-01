@@ -3,6 +3,7 @@
 #[desc="An empty Rust project for library development"];
 #[license="MIT"];
 
+// #[warn(unused_mut)];
 // #[deny(non_camel_case_types)];
 // #[deny(missing_doc)];
 // #[feature(managed_boxes)];
