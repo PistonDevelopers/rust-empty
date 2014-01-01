@@ -67,7 +67,10 @@ If it does not work first time, try
 
 ##Usage
 
-Copy the 'src' folder to your workspace directory.
+There are 2 things you need to copy to the workspace directory:
+
+1. The 'src' folder.  
+2. The '.gitignore' file.  
 
 ###Workspace
 
