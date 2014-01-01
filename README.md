@@ -67,6 +67,8 @@ If it does not work first time, try
 
 ##Usage
 
+Copy the 'src' folder to your workspace directory.
+
 ###Workspace
 
 The 'rustpkg' tool is designed to compile multiple projects into multiple libraries and executables.  
