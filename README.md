@@ -74,6 +74,21 @@ Read the tutorial to get an idea what a 'workspace' means.
 
 <a href="http://static.rust-lang.org/doc/master/tutorial-rustpkg.html" target="_blank">Rustpkg Tutorial</a>
 
+###Start New Library Project With Vim
+
+In the 'src' directory, copy the 'empty' folder.  
+There are 3 places you need to rename:
+
+1. The copied folder.
+2. The 'crate_id' in 'lib.rs'.
+3. The 'extern mod' in 'test.rs'.
+
+###Start New Executable Project With Vim
+
+In the 'src' directory, create a new empty folder.  
+
+    vim main.rs
+
 ###Build The Empty Project
 
     rustpkg build empty
