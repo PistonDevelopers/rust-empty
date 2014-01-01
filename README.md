@@ -18,8 +18,8 @@ Rust is a programming language developed at Mozilla Research.
 
 ###Using The Terminal
 
-This introduction is designed for the Unix terminal environment.  
-Mac OSX fine, but GNU/Linux is recommended (free software / open source).  
+This introduction is designed for the GNU/Linux environment.  
+If you have another operating system, consult the tutorial or get GNU/Linux for free:  
 
 <a href="http://www.ubuntu.com/" target="_blank">Ubuntu (GNU/Linux)</a>  
 <a href="http://linuxmint.com/" target="_blank">Linux Mint (GNU/Linux)</a>  
@@ -80,7 +80,7 @@ Read the tutorial to get an idea what a 'workspace' means.
 
 <a href="http://static.rust-lang.org/doc/master/tutorial-rustpkg.html" target="_blank">Rustpkg Tutorial</a>
 
-###Start New Library Project With Vim
+###New Library
 
 In the 'src' directory, copy the 'empty' folder.  
 There are 3 places you need to rename:
@@ -89,11 +89,35 @@ There are 3 places you need to rename:
 2. The 'crate_id' in 'lib.rs'.
 3. The 'extern mod' in 'test.rs'.
 
-###Start New Executable Project With Vim
+###Hello World With Vim
 
-In the 'src' directory, create a new empty folder.  
+First create the directory for the executable:
 
-    vim main.rs
+    mkdir src/helloworld
+
+Open new file 'main.rs' in Vim:
+    
+    vim src/helloworld/main.rs
+
+Hit 'i' to enter edit mode:    
+
+    i
+
+Type the following:
+    
+    fn main() {
+        println("hello world!");
+    }
+
+Hit 'Esc' to go back to read-only mode:
+    
+    Esc
+
+Save the file, create executable and run the it:
+    
+    :w | :!rustpkg install helloworld && ./bin/helloworld
+
+When you type ':' you can use the (up arrow) key to get the last command.
 
 ###Build The Empty Project
 
