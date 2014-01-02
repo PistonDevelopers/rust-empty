@@ -1,4 +1,4 @@
-#[crate_id = "empty#0.1"];
+#[crate_id="empty#0.1"];
 #[crate_type="rlib"];
 #[desc="An empty Rust project for library development"];
 #[license="MIT"];
