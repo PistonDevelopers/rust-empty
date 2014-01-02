@@ -4,6 +4,10 @@ rust-empty
 An empty project ready for Rust development.  
 MIT license (or just use it as you like).  
 
+##Projects Using rust-empty
+
+<a href="https://github.com/bvssvni/rust-alg" target="_blank">rust-alg</a>
+
 ##Introduction To Rust
 
 Rust is a programming language developed at Mozilla Research.  
@@ -94,3 +98,10 @@ Creates a new folder 'doc'.
 ###Library Design
 
 <a href="https://github.com/bvssvni/rust-empty/wiki/How-to-use-generics-and-traits-in-Rust" target="_blank">How to use generics and traits in Rust</a>  
+
+###Rust CI
+
+Each night the latest version of Rust on Ubuntu is built against a list of projects.  
+Add project by following instructions on the site:
+
+<a href="http://rust-ci.org/" target="_blank">Rust CI</a>
