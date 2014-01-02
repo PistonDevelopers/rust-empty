@@ -91,3 +91,6 @@ Creates a new folder 'doc'.
 
 <a href="https://github.com/mozilla/rust/wiki/Doc-using-rustdoc" target="_blank">Using rustdoc</a>
 
+###Library Design
+
+<a href="https://github.com/bvssvni/rust-empty/wiki/How-to-use-generics-and-traits-in-Rust" target="_blank">How to use generics and traits in Rust</a>  
