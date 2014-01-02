@@ -54,6 +54,8 @@ When you enter a edit mode you can go back using Esc.
     :w                  Save file.
     :q                  Quit.
     i                   Edit text.
+    gg                  Jump to first line.
+    Shift+g             Jump to last line.
     u                   Undo.
     Ctrl+r              Redo.
     p                   Paste copied text.
