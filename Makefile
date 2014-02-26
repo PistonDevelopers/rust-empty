@@ -3,7 +3,7 @@ SHELL := /bin/bash
 EXAMPLE_FILES = examples/*.rs
 
 all:
-	clear && echo "--- rust-empty (0.1-pre)" && echo "make run 		- Runs executable" && echo "make exe 		- Executable" && echo "make lib 		- Different kinds of libraries" && echo "make rlib 		- Static library" && echo "make test 		- Tests library" && echo "make doc 		- Builds documentation for library" && echo "make examples 		- Builds examples" && echo "make clean 		- Deletes binaries and documentation." && echo "make clear-project 	- Removes all files except 'Makefile'" && echo "make cargo-lite-exe 	- Setup executable package" && echo "make cargo-lite-lib 	- Setup library package" && echo "make rust-ci-lib 	- Setup Travis CI Rust library" && echo "make rust-ci-exe 	- Setup Travis CI Rust executable"
+	clear && echo "--- rust-empty (0.1 001)" && echo "make run 		- Runs executable" && echo "make exe 		- Executable" && echo "make lib 		- Different kinds of libraries" && echo "make rlib 		- Static library" && echo "make test 		- Tests library" && echo "make doc 		- Builds documentation for library" && echo "make examples 		- Builds examples" && echo "make clean 		- Deletes binaries and documentation." && echo "make clear-project 	- WARNING: Removes all files except 'Makefile'" && echo "make clear-git 		- WARNING: Removes Git" && echo "make cargo-lite-exe 	- Setup executable package" && echo "make cargo-lite-lib 	- Setup library package" && echo "make rust-ci-lib 	- Setup Travis CI Rust library" && echo "make rust-ci-exe 	- Setup Travis CI Rust executable"
 
 cargo-lite-exe: src src/main.rs
 	(test -e cargo-lite.conf && clear && echo "--- The file 'cargo-lite.conf' already exists") || (echo -e "deps = [\n]\n\n[build]\ncrate_root = \"src/main.rs\"\nrustc_args = []\n" > cargo-lite.conf && clear && echo "--- Created 'cargo-lite.conf' for executable" && cat cargo-lite.conf)
@@ -46,6 +46,12 @@ src:
 examples-dir:
 	test -e examples || (mkdir examples && echo -e "fn main() {\n\tprintln!(\"Hello!\");\n}\n" > examples/hello.rs && clear && echo "--- Created examples folder")
 
+rust-dir:
+	mkdir -p .rust
+
+git-ignore:
+	(test -e .gitignore && clear && echo "--- The file '.gitignore' already exists") || (echo -e ".DS_Store\n/bin/\n/doc/\n/build/\n/.rust\n" > .gitignore && clear && echo "--- Created '.gitignore' for git" && cat .gitignore)
+
 examples: $(EXAMPLE_FILES)
 
 $(EXAMPLE_FILES): lib examples-dir
@@ -74,5 +80,10 @@ clear-project:
 	rm -rf bin/
 	rm -rf examples/
 	rm -rf doc/
-	clear && echo "--- Removed all source files, binaries and documentation" && echo "--- Content in project folder" && ls
+	clear && echo "--- Removed all source files, binaries and documentation" && echo "--- Content in project folder" && ls -a
+
+clear-git:
+	rm -f .gitignore
+	rm -rf .git
+	clear && echo "--- Removed Git" && echo "--- Content in project folder" && ls -a
 
