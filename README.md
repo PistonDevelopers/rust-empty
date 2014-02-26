@@ -1,12 +1,40 @@
 rust-empty
 ==========
 
-An empty project ready for Rust development.  
+A makefile ready for Rust development.  
 MIT license (or just use it as you like).  
+Requires Linux or Mac OS X.  
+
+##Usage
+
+Just copy 'Makefile' to an empty folder.  
+In the Terminal window, navigate to the folder and type 'make'.  
+This should give you a lot of options:
+
+```
+--- rust-empty (0.1-pre)
+make run 		    - Runs executable
+make exe 		    - Executable
+make lib 		    - Different kinds of libraries
+make rlib 	    	- Static library
+make test 		    - Tests library
+make doc 	    	- Builds documentation for library
+make examples 		- Builds examples
+make clean 	    	- Deletes binaries and documentation.
+make clear-project 	- Removes all files except 'Makefile'
+make cargo-lite-exe - Setup executable package
+make cargo-lite-lib - Setup library package
+make rust-ci-lib 	- Setup Travis CI Rust library
+make rust-ci-exe 	- Setup Travis CI Rust executable
+```
+
+All the commands creates the files and folders necessary to compile.  
+For example, if you type 'make exe' it will add a hello-world program to 'src/main.rs'.  
+You can use 'make clear-project' to revert back to just the 'Makefile'.  
 
 ##Projects Using rust-empty
 
-<a href="https://github.com/bvssvni/rust-alg" target="_blank">rust-alg</a>
+<a href="https://github.com/bvssvni/rust-alg" target="_blank">rust-alg</a> (not updated)
 
 ##Introduction To Rust
 
