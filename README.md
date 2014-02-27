@@ -1,7 +1,7 @@
 rust-empty
 ==========
 
-A makefile ready for Rust development.  
+A Makefile ready for Rust development.  
 MIT license (or just use it as you like).  
 Requires Linux or Mac OS X.  
 
