@@ -7,13 +7,40 @@ Requires Linux or Mac OS X.
 
 ##What is Rust-Empty?
 
+Starting a new project with the Rust programming language is not easy.  
+There are tons of slightly-annoying-but-not-critical-things to remember.  
 
+For example:
+
+* Put code in a 'src' directory
+* Need a 'crate_id' for your library
+* Missing documentation annotation
+* A '.gitignore' to avoid rubish in the repository
+* Library binaries should be in 'build' directory
+* Example programs better not be in the 'src' directory
+* Need a "-O" flag to compile optimized code
+* Dependencies, rust-nightly check etc.
+
+Rust-empty is a user-friendly Makefile that does all these small tasks for you.  
+
+###Goals
+
+* Work on Linux and Mac OS X
+* Convention by 'best practice' of Rust community
+* Features are optional, non-interfering and gives informative output
+* Integrate with other tools from Rust community
+
+###Non-Goals
+
+* Windows support
+* Backward compatibility
+* Require any sort of internal configuration
+* Replace other tools, such as package management
 
 ##Usage
 
-Just copy 'Makefile' to an empty folder.  
-In the Terminal window, navigate to the folder and type 'make'.  
-This should give you a lot of options:
+Copy 'Makefile' to an empty folder.  
+In the Terminal window, 'make':  
 
 ```
 --- rust-empty (0.1 002)
