@@ -1,31 +1,65 @@
 rust-empty
 ==========
 
-A makefile ready for Rust development.  
+A Makefile ready for Rust development.  
 MIT license (or just use it as you like).  
 Requires Linux or Mac OS X.  
 
+##What is Rust-Empty?
+
+Starting a new project with the Rust programming language is not easy.  
+There are tons of slightly-annoying-but-not-critical-things to remember.  
+
+For example:
+
+* Put code in a 'src' directory
+* Need a 'crate_id' for your library
+* Missing documentation annotation
+* A '.gitignore' to avoid rubish in the repository
+* Library binaries should be in 'build' directory
+* Example programs better not be in the 'src' directory
+* Need a "-O" flag to compile optimized code
+* Dependencies, rust-nightly check etc.
+
+Rust-empty is a user-friendly Makefile that does all these small tasks for you.  
+
+###Goals
+
+* Work on Linux and Mac OS X
+* Convention by 'best practice' of Rust community
+* Features are optional, non-interfering and gives informative output
+* Integrate with other tools from Rust community
+
+###Non-Goals
+
+* Windows support
+* Backward compatibility
+* Require any sort of internal configuration
+* Replace other tools, such as package management
+
 ##Usage
 
-Just copy 'Makefile' to an empty folder.  
-In the Terminal window, navigate to the folder and type 'make'.  
-This should give you a lot of options:
+Copy 'Makefile' to an empty folder.  
+In the Terminal window, 'make':  
 
 ```
---- rust-empty (0.1-pre)
-make run 		    - Runs executable
-make exe 		    - Executable
-make lib 		    - Different kinds of libraries
-make rlib 	    	- Static library
-make test 		    - Tests library
-make doc 	    	- Builds documentation for library
-make examples 		- Builds examples
-make clean 	    	- Deletes binaries and documentation.
-make clear-project 	- Removes all files except 'Makefile'
+--- rust-empty (0.1 002)
+make run 		        - Runs executable
+make exe 		        - Executable
+make lib 		        - Different kinds of libraries
+make rlib 		      - Static library
+make test 		      - Tests library
+make bench 		      - Benchmarks library
+make doc 		        - Builds documentation for library
+make git-ignore 	  - Ignored by git
+make examples 		  - Builds examples
+make clean 		      - Deletes binaries and documentation.
+make clear-project 	- WARNING: Removes all files except 'Makefile'
+make clear-git 		  - WARNING: Removes Git
 make cargo-lite-exe - Setup executable package
 make cargo-lite-lib - Setup library package
-make rust-ci-lib 	- Setup Travis CI Rust library
-make rust-ci-exe 	- Setup Travis CI Rust executable
+make rust-ci-lib 	  - Setup Travis CI Rust library
+make rust-ci-exe 	  - Setup Travis CI Rust executable
 ```
 
 All the commands creates the files and folders necessary to compile.  
@@ -53,79 +87,6 @@ Rust is a programming language developed at Mozilla Research.
 <a href="https://github.com/bvssvni/rust-empty/wiki/How-to-use-the-terminal" target="_blank">How to use the terminal</a>  
 <a href="https://github.com/bvssvni/rust-empty/wiki/How-to-use-Vim" target="_blank">How to use Vim</a>  
 <a href="https://github.com/bvssvni/rust-empty/wiki/How-to-use-Github" target="_blank">How to use Github</a>
-
-##Usage
-
-There are 2 things you need to copy to the workspace directory:
-
-1. The 'src' folder.  
-2. The '.gitignore' file.  
-
-###Workspace
-
-The 'rustpkg' tool is designed to compile multiple projects into multiple libraries and executables.  
-Read the tutorial to get an idea what a 'workspace' means.  
-
-<a href="http://static.rust-lang.org/doc/master/tutorial-rustpkg.html" target="_blank">Rustpkg tutorial</a>
-
-###New Library
-
-In the 'src' directory, copy the 'empty' folder.  
-There are 3 places you need to rename:
-
-1. The copied folder.
-2. The 'crate_id' in 'lib.rs'.
-3. The 'extern mod' in 'test.rs'.
-
-Build the empty project:
-
-    rustpkg build empty
-    
-Test the empty project:
-
-    rustpkg test empty
-    
-###Hello World With Vim
-
-First create the directory for the executable:
-
-    mkdir src/helloworld
-
-Open new file 'main.rs' in Vim:
-    
-    vim src/helloworld/main.rs
-
-Hit 'i' to enter edit mode:    
-
-    i
-
-Type the following:
-    
-    fn main() {
-        println("hello world!");
-    }
-
-Hit 'Esc' to go back to read-only mode:
-    
-    Esc
-
-Save the file, create executable and run the it if the compilation succeeds:
-    
-    :w | :!rustpkg install helloworld && ./bin/helloworld
-
-When you type ':' you can use the (up arrow) key to get the last command.
-
-###Generate Documentation
-
-Creates a new folder 'doc'.
-
-    rustdoc src/*/lib.rs
-
-<a href="https://github.com/mozilla/rust/wiki/Doc-using-rustdoc" target="_blank">Using rustdoc</a>
-
-###Library Design
-
-<a href="https://github.com/bvssvni/rust-empty/wiki/How-to-use-generics-and-traits-in-Rust" target="_blank">How to use generics and traits in Rust</a>  
 
 ###Rust CI
 
