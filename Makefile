@@ -3,7 +3,7 @@ SHELL := /bin/bash
 EXAMPLE_FILES = examples/*.rs
 
 all:
-	clear && echo "--- rust-empty (0.1 002)" && echo "make run 		- Runs executable" && echo "make exe 		- Executable" && echo "make lib 		- Different kinds of libraries" && echo "make rlib 		- Static library" && echo "make test 		- Tests library" && echo "make bench 		- Benchmarks library" && echo "make doc 		- Builds documentation for library" && echo "make git-ignore 	- Ignored by git" && echo "make examples 		- Builds examples" && echo "make clean 		- Deletes binaries and documentation." && echo "make clear-project 	- WARNING: Removes all files except 'Makefile'" && echo "make clear-git 		- WARNING: Removes Git" && echo "make cargo-lite-exe 	- Setup executable package" && echo "make cargo-lite-lib 	- Setup library package" && echo "make rust-ci-lib 	- Setup Travis CI Rust library" && echo "make rust-ci-exe 	- Setup Travis CI Rust executable"
+	clear && echo "--- rust-empty (0.1 003)" && echo "make run 		- Runs executable" && echo "make exe 		- Executable" && echo "make lib 		- Different kinds of libraries" && echo "make rlib 		- Static library" && echo "make test 		- Tests library" && echo "make bench 		- Benchmarks library" && echo "make doc 		- Builds documentation for library" && echo "make git-ignore 	- Ignored by git" && echo "make examples 		- Builds examples" && echo "make clean 		- Deletes binaries and documentation." && echo "make clear-project 	- WARNING: Removes all files except 'Makefile'" && echo "make clear-git 		- WARNING: Removes Git" && echo "make cargo-lite-exe 	- Setup executable package" && echo "make cargo-lite-lib 	- Setup library package" && echo "make rust-ci-lib 	- Setup Travis CI Rust library" && echo "make rust-ci-exe 	- Setup Travis CI Rust executable"
 
 cargo-lite-exe: src src/main.rs
 	(test -e cargo-lite.conf && clear && echo "--- The file 'cargo-lite.conf' already exists") || (echo -e "deps = [\n]\n\n[build]\ncrate_root = \"src/main.rs\"\nrustc_args = []\n" > cargo-lite.conf && clear && echo "--- Created 'cargo-lite.conf' for executable" && cat cargo-lite.conf)
@@ -17,7 +17,7 @@ rust-ci-lib: src src/lib.rs
 rust-ci-exe: src src/main.rs
 	(test -e .travis.yml && clear && echo "--- The file '.travis.yml' already exists") || (echo -e "before_install:\n\t- yes | sudo add-apt-repository ppa:hansjorg/rust\n\t- sudo apt-get update\ninstall:\n\t- sudo apt-get install rust-nightly\nscript:\n\t- make exe\n" > .travis.yml && clear && echo "--- Created '.travis.yml' for executable" && cat .travis.yml)
 
-doc:
+doc: src $(shell find src/ -type f) 
 	clear && rustdoc src/lib.rs && clear && echo "--- Built documentation"
 
 run: exe
