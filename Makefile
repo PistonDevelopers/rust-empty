@@ -2,8 +2,10 @@ SHELL := /bin/bash
 
 EXAMPLE_FILES = examples/*.rs
 
+COMPILER_FLAGS = -O
+
 all:
-	clear && echo "--- rust-empty (0.1 003)" && echo "make run 		- Runs executable" && echo "make exe 		- Executable" && echo "make lib 		- Different kinds of libraries" && echo "make rlib 		- Static library" && echo "make test 		- Tests library" && echo "make bench 		- Benchmarks library" && echo "make doc 		- Builds documentation for library" && echo "make git-ignore 	- Ignored by git" && echo "make examples 		- Builds examples" && echo "make clean 		- Deletes binaries and documentation." && echo "make clear-project 	- WARNING: Removes all files except 'Makefile'" && echo "make clear-git 		- WARNING: Removes Git" && echo "make cargo-lite-exe 	- Setup executable package" && echo "make cargo-lite-lib 	- Setup library package" && echo "make rust-ci-lib 	- Setup Travis CI Rust library" && echo "make rust-ci-exe 	- Setup Travis CI Rust executable"
+	clear && echo "--- rust-empty (0.1 004)" && echo "make run 		- Runs executable" && echo "make exe 		- Executable" && echo "make lib 		- Different kinds of libraries" && echo "make rlib 		- Static library" && echo "make test 		- Tests library" && echo "make bench 		- Benchmarks library" && echo "make doc 		- Builds documentation for library" && echo "make git-ignore 	- Ignored by git" && echo "make examples 		- Builds examples" && echo "make clean 		- Deletes binaries and documentation." && echo "make clear-project 	- WARNING: Removes all files except 'Makefile'" && echo "make clear-git 		- WARNING: Removes Git" && echo "make cargo-lite-exe 	- Setup executable package" && echo "make cargo-lite-lib 	- Setup library package" && echo "make rust-ci-lib 	- Setup Travis CI Rust library" && echo "make rust-ci-exe 	- Setup Travis CI Rust executable"
 
 cargo-lite-exe: src src/main.rs
 	(test -e cargo-lite.conf && clear && echo "--- The file 'cargo-lite.conf' already exists") || (echo -e "deps = [\n]\n\n[build]\ncrate_root = \"src/main.rs\"\nrustc_args = []\n" > cargo-lite.conf && clear && echo "--- Created 'cargo-lite.conf' for executable" && cat cargo-lite.conf)
@@ -24,10 +26,10 @@ run: exe
 	clear && ./bin/main
 
 exe: bin src src/main.rs $(shell find src/ -type f)
-	clear && rustc -O src/main.rs -o bin/main -L build/ && echo "--- Built executable" && echo "--- Type 'make run' to run executable"
+	clear && rustc $(COMPILER_FLAGS) src/main.rs -o bin/main -L build/ && echo "--- Built executable" && echo "--- Type 'make run' to run executable"
 
 test: rlib src bin src/test.rs $(shell find src/ -type f)
-	clear && rustc -O --test src/test.rs -o bin/test -L build/ && echo "--- Built test" && ./bin/test
+	clear && rustc $(COMPILER_FLAGS) --test src/test.rs -o bin/test -L build/ && echo "--- Built test" && ./bin/test
 
 bench: test
 	clear && bin/test --bench
@@ -35,7 +37,7 @@ bench: test
 lib: rlib
 
 rlib: build src src/lib.rs $(shell find src/ -type f)
-	clear && rustc -O --crate-type=rlib src/lib.rs --out-dir build/ && clear && echo "--- Built rlib" && echo "--- Type 'make test' to test library"
+	clear && rustc $(COMPILER_FLAGS) --crate-type=rlib src/lib.rs --out-dir build/ && clear && echo "--- Built rlib" && echo "--- Type 'make test' to test library"
 
 bin:
 	mkdir -p bin
@@ -58,7 +60,7 @@ git-ignore:
 examples: $(EXAMPLE_FILES)
 
 $(EXAMPLE_FILES): lib examples-dir
-	rustc $@ -L build/ --out-dir examples/ 
+	rustc $(COMPILER_FLAGS) $@ -L build/ --out-dir examples/ 
 
 src/main.rs:
 	test -e src/main.rs || (echo -e "fn main() {\n\tprintln!(\"Hello world!\");\n}" > src/main.rs)
