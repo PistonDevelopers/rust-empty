@@ -208,6 +208,17 @@ clear-git:
 	&& ls -a
 
 rusti:
-	echo -e "#!/bin/sh\n\nwhile true; do\n  echo -n \" > \"\n  read line\n  rustc - -o tmp <<EOF\n  #[feature(globs, macro_rules, struct_variant)];\n  // extern mod extra;\n  fn main() {\n      let r = { \$$line };\n      println!(\"{:?}\", r);\n  }\nEOF\n  ./tmp\n  rm tmp\ndone" > rusti.sh \
-	&& chmod 755 rusti.sh
+	( \
+		test -e rusti.sh \
+		&& clear \
+		&& echo "--- The file 'rusti.sh' already exists" \
+	) \
+	|| \
+	( \
+		echo -e "#!/bin/sh\n\nwhile true; do\n  echo -n \" > \"\n  read line\n  rustc - -o tmp <<EOF\n  #[feature(globs, macro_rules, struct_variant)];\n  // extern mod extra;\n  fn main() {\n      let r = { \$$line };\n      println!(\"{:?}\", r);\n  }\nEOF\n  ./tmp\n  rm tmp\ndone" > rusti.sh \
+		&& chmod +x rusti.sh \
+		&& clear \
+		&& echo "--- Created 'rusti.sh'" \
+		&& echo "--- Type './rusti.sh' to start interactive Rust" \
+	)
 
