@@ -6,7 +6,7 @@ COMPILER_FLAGS = -O
 
 all:
 	clear \
-	&& echo "--- rust-empty (0.1 009)" \
+	&& echo "--- rust-empty (0.1 010)" \
 	&& echo "make run 		- Runs executable" \
 	&& echo "make exe 		- Builds main executable" \
 	&& echo "make lib 		- Different kinds of libraries" \
@@ -82,7 +82,7 @@ rust-ci-exe: src src/main.rs
 		&& cat .travis.yml \
 	)
 
-doc: src $(shell find src/ -type f) 
+doc: src $(shell test -e src/ && find src/ -type f) 
 	clear \
 	&& rustdoc src/lib.rs \
 	&& clear \
@@ -92,13 +92,13 @@ run: exe
 	clear \
 	&& ./bin/main
 
-exe: bin src src/main.rs $(shell find src/ -type f)
+exe: bin src src/main.rs $(shell test -e src/ && find src/ -type f)
 	clear \
 	&& rustc $(COMPILER_FLAGS) src/main.rs -o bin/main -L build/ \
 	&& echo "--- Built executable" \
 	&& echo "--- Type 'make run' to run executable"
 
-test: rlib src bin src/test.rs $(shell find src/ -type f)
+test: rlib src bin src/test.rs $(shell test -e src/ && find src/ -type f)
 	clear \
 	&& rustc $(COMPILER_FLAGS) --test src/test.rs -o bin/test -L build/ \
 	&& echo "--- Built test" \
@@ -110,7 +110,7 @@ bench: test
 
 lib: rlib
 
-rlib: build src src/lib.rs $(shell find src/ -type f)
+rlib: build src src/lib.rs $(shell test -e src/ && find src/ -type f)
 	clear \
 	&& rustc $(COMPILER_FLAGS) --crate-type=rlib src/lib.rs --out-dir build/ \
 	&& clear \
