@@ -14,7 +14,7 @@ all:
 	&& echo "make test 		- Tests library" \
 	&& echo "make bench 		- Benchmarks library" \
 	&& echo "make doc 		- Builds documentation for library" \
-	&& echo "make git-ignore 	- Ignored by git" \
+	&& echo "make git-ignore 	- Setup files to be ignored by Git" \
 	&& echo "make examples 		- Builds examples" \
 	&& echo "make clean 		- Deletes binaries and documentation." \
 	&& echo "make clear-project 	- WARNING: Deletes project files except 'Makefile'" \
