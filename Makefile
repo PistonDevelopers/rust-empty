@@ -8,7 +8,7 @@ all:
 	clear \
 	&& echo "--- rust-empty (0.1 008)" \
 	&& echo "make run 		- Runs executable" \
-	&& echo "make exe 		- Executable" \
+	&& echo "make exe 		- Builds main executable" \
 	&& echo "make lib 		- Different kinds of libraries" \
 	&& echo "make rlib 		- Static library" \
 	&& echo "make test 		- Tests library" \
