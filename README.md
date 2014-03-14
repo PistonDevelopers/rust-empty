@@ -1,7 +1,7 @@
 rust-empty
 ==========
 
-A Makefile ready for Rust development.  
+A Makefile to get started with Rust development.  
 MIT license (or just use it as you like).  
 Requires Linux or Mac OS X.  
 
@@ -40,26 +40,27 @@ Rust-empty is a user-friendly Makefile that does all these small tasks for you.
 ##Usage
 
 Copy 'Makefile' to an empty folder.  
-In the Terminal window, 'make':  
+In the Terminal window, type 'make':  
 
 ```
---- rust-empty (0.1 002)
-make run 		        - Runs executable
-make exe 		        - Executable
-make lib 		        - Different kinds of libraries
-make rlib 		      - Static library
-make test 		      - Tests library
-make bench 		      - Benchmarks library
-make doc 		        - Builds documentation for library
-make git-ignore 	  - Ignored by git
-make examples 		  - Builds examples
-make clean 		      - Deletes binaries and documentation.
-make clear-project 	- WARNING: Removes all files except 'Makefile'
-make clear-git 		  - WARNING: Removes Git
-make cargo-lite-exe - Setup executable package
-make cargo-lite-lib - Setup library package
-make rust-ci-lib 	  - Setup Travis CI Rust library
-make rust-ci-exe 	  - Setup Travis CI Rust executable
+--- rust-empty (0.1 006)
+make run 		- Runs executable
+make exe 		- Executable
+make lib 		- Different kinds of libraries
+make rlib 		- Static library
+make test 		- Tests library
+make bench 		- Benchmarks library
+make doc 		- Builds documentation for library
+make git-ignore 	- Ignored by git
+make examples 		- Builds examples
+make clean 		- Deletes binaries and documentation.
+make clear-project 	- WARNING: Deletes project files except 'Makefile'
+make clear-git 		- WARNING: Deletes Git setup
+make cargo-lite-exe 	- Setup executable package
+make cargo-lite-lib 	- Setup library package
+make rust-ci-lib 	- Setup Travis CI Rust library
+make rust-ci-exe 	- Setup Travis CI Rust executable
+make rusti		- Setup 'rusti.sh' for interactive Rust
 ```
 
 All the commands creates the files and folders necessary to compile.  
