@@ -188,6 +188,7 @@ clean:
 clear-project:
 	rm -f cargo-lite.conf
 	rm -f .travis.yml
+	rm -f rusti.sh
 	rm -rf build/
 	rm -rf src/
 	rm -rf bin/
