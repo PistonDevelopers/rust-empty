@@ -40,7 +40,7 @@ Rust-empty is a user-friendly Makefile that does all these small tasks for you.
 ##Usage
 
 Copy 'Makefile' to an empty folder.  
-In the Terminal window, 'make':  
+In the Terminal window, type 'make':  
 
 ```
 --- rust-empty (0.1 006)
