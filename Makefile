@@ -146,7 +146,7 @@ git-ignore:
 	) \
 	|| \
 	( \
-		echo -e ".DS_Store\n/bin/\n/doc/\n/build/\n/.rust\n" > .gitignore \
+		echo -e ".DS_Store\n/bin/\n/doc/\n/build/\n/.rust\nrusti.sh\n" > .gitignore \
 		&& clear \
 		&& echo "--- Created '.gitignore' for git" \
 		&& cat .gitignore \
