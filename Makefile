@@ -17,8 +17,8 @@ all:
 	&& echo "make git-ignore 	- Ignored by git" \
 	&& echo "make examples 		- Builds examples" \
 	&& echo "make clean 		- Deletes binaries and documentation." \
-	&& echo "make clear-project 	- WARNING: Removes all files except 'Makefile'" \
-	&& echo "make clear-git 		- WARNING: Removes Git" \
+	&& echo "make clear-project 	- WARNING: Deletes project files except 'Makefile'" \
+	&& echo "make clear-git 		- WARNING: Deletes Git setup" \
 	&& echo "make cargo-lite-exe 	- Setup executable package" \
 	&& echo "make cargo-lite-lib 	- Setup library package" \
 	&& echo "make rust-ci-lib 	- Setup Travis CI Rust library" \
