@@ -22,7 +22,8 @@ all:
 	&& echo "make cargo-lite-exe 	- Setup executable package" \
 	&& echo "make cargo-lite-lib 	- Setup library package" \
 	&& echo "make rust-ci-lib 	- Setup Travis CI Rust library" \
-	&& echo "make rust-ci-exe 	- Setup Travis CI Rust executable"
+	&& echo "make rust-ci-exe 	- Setup Travis CI Rust executable" \
+	&& echo "make rusti		- Setup 'rusti.sh' for interactive Rust" \
 
 cargo-lite-exe: src src/main.rs
 	( \
@@ -204,4 +205,8 @@ clear-git:
 	&& echo "--- Removed Git" \
 	&& echo "--- Content in project folder" \
 	&& ls -a
+
+rusti:
+	echo -e "#!/bin/sh\n\nwhile true; do\n  echo -n \" > \"\n  read line\n  rustc - -o tmp <<EOF\n  #[feature(globs, macro_rules, struct_variant)];\n  // extern mod extra;\n  fn main() {\n      let r = { \$$line };\n      println!(\"{:?}\", r);\n  }\nEOF\n  ./tmp\n  rm tmp\ndone" > rusti.sh \
+	&& chmod 755 rusti.sh
 
