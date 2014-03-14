@@ -6,7 +6,7 @@ COMPILER_FLAGS = -O
 
 all:
 	clear \
-	&& echo "--- rust-empty (0.1 006)" \
+	&& echo "--- rust-empty (0.1 007)" \
 	&& echo "make run 		- Runs executable" \
 	&& echo "make exe 		- Executable" \
 	&& echo "make lib 		- Different kinds of libraries" \
