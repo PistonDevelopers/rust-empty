@@ -16,14 +16,15 @@ all:
 	&& echo "make doc 		- Builds documentation for library" \
 	&& echo "make git-ignore 	- Setup files to be ignored by Git" \
 	&& echo "make examples 		- Builds examples" \
-	&& echo "make clean 		- Deletes binaries and documentation." \
-	&& echo "make clear-project 	- WARNING: Deletes project files except 'Makefile'" \
-	&& echo "make clear-git 		- WARNING: Deletes Git setup" \
 	&& echo "make cargo-lite-exe 	- Setup executable package" \
 	&& echo "make cargo-lite-lib 	- Setup library package" \
 	&& echo "make rust-ci-lib 	- Setup Travis CI Rust library" \
 	&& echo "make rust-ci-exe 	- Setup Travis CI Rust executable" \
 	&& echo "make rusti		- Setup 'rusti.sh' for interactive Rust" \
+	&& echo "make clean 		- Deletes binaries and documentation." \
+	&& echo "make clear-project 	- WARNING: Deletes project files except 'Makefile'" \
+	&& echo "make clear-git 		- WARNING: Deletes Git setup" \
+
 
 cargo-lite-exe: src src/main.rs
 	( \
