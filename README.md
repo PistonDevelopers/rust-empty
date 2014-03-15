@@ -5,6 +5,8 @@ A Makefile to get started with Rust development.
 MIT license (or just use it as you like).  
 Requires Linux or Mac OS X.  
 
+I often hang around in the #rust IRC channel (bvssvni)
+
 ##What is Rust-Empty?
 
 Starting a new project with the Rust programming language is not easy.  
