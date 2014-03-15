@@ -1,6 +1,11 @@
 .DS_Store
+/src/
 /bin/
 /doc/
 /build/
+/examples/
 /.rust
+rusti.sh
+.travis.yml
+cargo-lite.conf
 
