@@ -1,16 +1,22 @@
-rust-empty
+Rust-Empty
 ==========
 
 A Makefile to get started with Rust development.  
 MIT license (or just use it as you like).  
-Requires Linux or Mac OS X.  
+Requires Linux or Mac OS X (with developer tools).  
 
 If you want to contact me, I often hang around in the #rust IRC channel (bvssvni)
 
 ##What is Rust-Empty?
 
-Starting a new project with the Rust programming language is not easy.  
-There are tons of slightly-annoying-but-not-critical-things to remember.  
+Rust-Empty is a user friendly Makefile/Bash setup tool for Rust programmers.  
+Makefiles runs out of the box on Linux and OSX (with developer tools).  
+The setup uses best practices and conventions learned from the Rust community.  
+Pull requests/fixes are welcome!  
+
+*Latest feature: A 'rusti' like script similar to the bot in IRC!*
+
+What are these 'best practices'?
 
 For example:
 
@@ -22,8 +28,6 @@ For example:
 * Example programs better not be in the 'src' directory
 * Need a "-O" flag to compile optimized code
 * Dependencies, rust-nightly check etc.
-
-Rust-empty is a user-friendly Makefile that does all these small tasks for you.  
 
 ###Goals
 
@@ -41,37 +45,35 @@ Rust-empty is a user-friendly Makefile that does all these small tasks for you.
 
 ##Usage
 
-Copy 'Makefile' to an empty folder.  
-In the Terminal window, type 'make':  
+1. Create a new empty folder for your project.  
+2. Copy 'Makefile' to the project folder.  
+3. Open the Terminal window and navigate to the project folder.  
+4. Type 'make'.  
 
 ```
---- rust-empty (0.1 006)
+--- rust-empty (0.1 010)
 make run 		- Runs executable
-make exe 		- Executable
+make exe 		- Builds main executable
 make lib 		- Different kinds of libraries
 make rlib 		- Static library
 make test 		- Tests library
 make bench 		- Benchmarks library
 make doc 		- Builds documentation for library
-make git-ignore 	- Ignored by git
+make git-ignore 	- Setup files to be ignored by Git
 make examples 		- Builds examples
-make clean 		- Deletes binaries and documentation.
-make clear-project 	- WARNING: Deletes project files except 'Makefile'
-make clear-git 		- WARNING: Deletes Git setup
 make cargo-lite-exe 	- Setup executable package
 make cargo-lite-lib 	- Setup library package
 make rust-ci-lib 	- Setup Travis CI Rust library
 make rust-ci-exe 	- Setup Travis CI Rust executable
 make rusti		- Setup 'rusti.sh' for interactive Rust
+make clean 		- Deletes binaries and documentation.
+make clear-project 	- WARNING: Deletes project files except 'Makefile'
+make clear-git 		- WARNING: Deletes Git setup
 ```
 
 All the commands creates the files and folders necessary to compile.  
 For example, if you type 'make exe' it will add a hello-world program to 'src/main.rs'.  
 You can use 'make clear-project' to revert back to just the 'Makefile'.  
-
-##Projects Using rust-empty
-
-<a href="https://github.com/bvssvni/rust-alg" target="_blank">rust-alg</a> (not updated)
 
 ##Introduction To Rust
 
