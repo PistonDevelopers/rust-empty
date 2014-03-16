@@ -216,7 +216,7 @@ rusti:
 	) \
 	|| \
 	( \
-		echo -e "#!/bin/sh\n\nwhile true; do\n  echo -n \" > \"\n  read line\n  TMP=`mktemp`\n  rustc - -o \$$TMP <<EOF\n  #[feature(globs, macro_rules, struct_variant)];\n  // extern mod extra;\n  fn main() {\n      let r = { \$$line };\n      println!(\"{:?}\", r);\n  }\nEOF\n  \$$TMP\n  rm \$$TMP\ndone" > rusti.sh \
+		echo -e "#!/bin/sh\n\n#written by mcpherrin\n\nwhile true; do\n  echo -n \" > \"\n  read line\n  TMP=`mktemp`\n  rustc - -o \$$TMP <<EOF\n  #[feature(globs, macro_rules, struct_variant)];\n  // extern mod extra;\n  fn main() {\n      let r = { \$$line };\n      println!(\"{:?}\", r);\n  }\nEOF\n  \$$TMP\n  rm \$$TMP\ndone" > rusti.sh \
 		&& chmod +x rusti.sh \
 		&& clear \
 		&& echo "--- Created 'rusti.sh'" \
