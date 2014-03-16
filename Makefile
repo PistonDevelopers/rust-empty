@@ -2,11 +2,12 @@ SHELL := /bin/bash
 
 EXAMPLE_FILES = examples/*.rs
 
+COMPILER = rustc
 COMPILER_FLAGS = -O
 
 all:
 	clear \
-	&& echo "--- rust-empty (0.1 010)" \
+	&& echo "--- rust-empty (0.1 011)" \
 	&& echo "make run 		- Runs executable" \
 	&& echo "make exe 		- Builds main executable" \
 	&& echo "make lib 		- Different kinds of libraries" \
@@ -94,13 +95,13 @@ run: exe
 
 exe: bin src src/main.rs $(shell test -e src/ && find src/ -type f)
 	clear \
-	&& rustc $(COMPILER_FLAGS) src/main.rs -o bin/main -L build/ \
+	&& $(COMPILER) $(COMPILER_FLAGS) src/main.rs -o bin/main -L build/ \
 	&& echo "--- Built executable" \
 	&& echo "--- Type 'make run' to run executable"
 
 test: rlib src bin src/test.rs $(shell test -e src/ && find src/ -type f)
 	clear \
-	&& rustc $(COMPILER_FLAGS) --test src/test.rs -o bin/test -L build/ \
+	&& $(COMPILER) $(COMPILER_FLAGS) --test src/test.rs -o bin/test -L build/ \
 	&& echo "--- Built test" \
 	&& ./bin/test
 
@@ -112,7 +113,7 @@ lib: rlib
 
 rlib: build src src/lib.rs $(shell test -e src/ && find src/ -type f)
 	clear \
-	&& rustc $(COMPILER_FLAGS) --crate-type=rlib src/lib.rs --out-dir build/ \
+	&& $(COMPILER) $(COMPILER_FLAGS) --crate-type=rlib src/lib.rs --out-dir build/ \
 	&& clear \
 	&& echo "--- Built rlib" \
 	&& echo "--- Type 'make test' to test library"
@@ -156,7 +157,7 @@ git-ignore:
 examples: $(EXAMPLE_FILES)
 
 $(EXAMPLE_FILES): lib examples-dir
-	rustc $(COMPILER_FLAGS) $@ -L build/ --out-dir examples/ 
+	$(COMPILER) $(COMPILER_FLAGS) $@ -L build/ --out-dir examples/ 
 
 src/main.rs:
 	test -e src/main.rs \
@@ -216,7 +217,7 @@ rusti:
 	) \
 	|| \
 	( \
-		echo -e "#!/bin/sh\n\n#written by mcpherrin\n\nwhile true; do\n  echo -n \" > \"\n  read line\n  TMP=`mktemp`\n  rustc - -o \$$TMP <<EOF\n  #[feature(globs, macro_rules, struct_variant)];\n  // extern mod extra;\n  fn main() {\n      let r = { \$$line };\n      println!(\"{:?}\", r);\n  }\nEOF\n  \$$TMP\n  rm \$$TMP\ndone" > rusti.sh \
+		echo -e "#!/bin/sh\n\n#written by mcpherrin\n\nwhile true; do\n  echo -n \" > \"\n  read line\n  TMP=`mktemp`\n  $(COMPILER) - -o \$$TMP <<EOF\n  #[feature(globs, macro_rules, struct_variant)];\n  // extern mod extra;\n  fn main() {\n      let r = { \$$line };\n      println!(\"{:?}\", r);\n  }\nEOF\n  \$$TMP\n  rm \$$TMP\ndone" > rusti.sh \
 		&& chmod +x rusti.sh \
 		&& clear \
 		&& echo "--- Created 'rusti.sh'" \
