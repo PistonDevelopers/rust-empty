@@ -10,7 +10,9 @@ If you want to contact me, I often hang around in the #rust IRC channel (bvssvni
 ##What is Rust-Empty?
 
 Rust-Empty is a user friendly Makefile/Bash setup tool for Rust programmers.  
-Makefiles runs out of the box on Linux and OSX (with developer tools).  
+It automates setup of directories and configuration files.  
+Once setup is completed, replace or modify the Makefile to suit your needs.  
+The Makefile works out of the box on Linux and OSX (with developer tools).  
 The setup uses best practices and conventions learned from the Rust community.  
 Pull requests/fixes are welcome!  
 
