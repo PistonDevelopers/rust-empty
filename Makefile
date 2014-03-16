@@ -4,6 +4,7 @@ EXAMPLE_FILES = examples/*.rs
 
 COMPILER = rustc
 COMPILER_FLAGS = -O
+RUSTDOC = rustdoc
 
 all:
 	clear \
@@ -85,7 +86,7 @@ rust-ci-exe: src src/main.rs
 
 doc: src $(shell test -e src/ && find src/ -type f) 
 	clear \
-	&& rustdoc src/lib.rs \
+	&& $(RUSTDOC) src/lib.rs \
 	&& clear \
 	&& echo "--- Built documentation"
 
