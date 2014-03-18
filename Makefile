@@ -29,7 +29,7 @@ RUSTDOC = rustdoc
 
 all:
 	clear \
-	&& echo "--- rust-empty (0.1 012)" \
+	&& echo "--- rust-empty (0.1 013)" \
 	&& echo "make run 		- Runs executable" \
 	&& echo "make exe 		- Builds main executable" \
 	&& echo "make lib 		- Different kinds of libraries" \
@@ -179,7 +179,9 @@ git-ignore:
 examples: $(EXAMPLE_FILES)
 
 $(EXAMPLE_FILES): lib examples-dir
-	$(COMPILER) $(COMPILER_FLAGS) $@ -L build/ --out-dir examples/ 
+	$(COMPILER) $(COMPILER_FLAGS) $@ -L build/ --out-dir examples/ \
+	&& clear \
+	&& echo "--- Built examples"
 
 src/main.rs:
 	test -e src/main.rs \
