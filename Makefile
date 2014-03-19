@@ -29,7 +29,7 @@ RUSTDOC = rustdoc
 
 all:
 	clear \
-	&& echo "--- rust-empty (0.1 013)" \
+	&& echo "--- rust-empty (0.1 014)" \
 	&& echo "make run 		- Runs executable" \
 	&& echo "make exe 		- Builds main executable" \
 	&& echo "make lib 		- Different kinds of libraries" \
@@ -44,6 +44,7 @@ all:
 	&& echo "make rust-ci-lib 	- Setup Travis CI Rust library" \
 	&& echo "make rust-ci-exe 	- Setup Travis CI Rust executable" \
 	&& echo "make rusti		- Setup 'rusti.sh' for interactive Rust" \
+	&& echo "make loc		- Count lines of code in src folder" \
 	&& echo "make clean 		- Deletes binaries and documentation." \
 	&& echo "make clear-project 	- WARNING: Deletes project files except 'Makefile'" \
 	&& echo "make clear-git 		- WARNING: Deletes Git setup" \
@@ -247,4 +248,9 @@ rusti:
 		&& echo "--- Created 'rusti.sh'" \
 		&& echo "--- Type './rusti.sh' to start interactive Rust" \
 	)
+
+loc:
+	clear \
+	&& echo "--- Counting lines of .rs files in 'src' (LOC):" \
+	&& find src/ -type f -name "*.rs" -exec cat {} \; | wc -l
 
