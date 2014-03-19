@@ -206,29 +206,29 @@ src/lib.rs:
 	)
 
 clean:
-	rm -rf build/
-	rm -rf doc/
+	rm -rf "build/"
+	rm -rf "doc/"
 	rm -f bin/*
 	clear \
 	&& echo "--- Deleted binaries and documentation"
 
 clear-project:
-	rm -f cargo-lite.conf
-	rm -f .travis.yml
-	rm -f rusti.sh
-	rm -rf build/
-	rm -rf src/
-	rm -rf bin/
-	rm -rf examples/
-	rm -rf doc/
+	rm -f "cargo-lite.conf"
+	rm -f ".travis.yml"
+	rm -f "rusti.sh"
+	rm -rf "build/"
+	rm -rf "src/"
+	rm -rf "bin/"
+	rm -rf "examples/"
+	rm -rf "doc/"
 	clear \
 	&& echo "--- Removed all source files, binaries and documentation" \
 	&& echo "--- Content in project folder" \
 	&& ls -a
 
 clear-git:
-	rm -f .gitignore
-	rm -rf .git
+	rm -f ".gitignore"
+	rm -rf ".git"
 	clear \
 	&& echo "--- Removed Git" \
 	&& echo "--- Content in project folder" \
