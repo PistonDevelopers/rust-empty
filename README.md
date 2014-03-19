@@ -16,7 +16,7 @@ The Makefile works out of the box on Linux and OSX (with developer tools).
 The setup uses best practices and conventions learned from the Rust community.  
 Pull requests/fixes are welcome!  
 
-*Latest feature: A 'rusti' like script similar to the bot in IRC!*
+*Latest feature: Type 'make loc' to count the lines of code in src folder!*
 
 What are these 'best practices'?
 
@@ -53,7 +53,7 @@ For example:
 4. Type 'make'.  
 
 ```
---- rust-empty (0.1 010)
+--- rust-empty (0.1 014)
 make run 		- Runs executable
 make exe 		- Builds main executable
 make lib 		- Different kinds of libraries
@@ -68,6 +68,7 @@ make cargo-lite-lib 	- Setup library package
 make rust-ci-lib 	- Setup Travis CI Rust library
 make rust-ci-exe 	- Setup Travis CI Rust executable
 make rusti		- Setup 'rusti.sh' for interactive Rust
+make loc		- Count lines of code in src folder
 make clean 		- Deletes binaries and documentation.
 make clear-project 	- WARNING: Deletes project files except 'Makefile'
 make clear-git 		- WARNING: Deletes Git setup
