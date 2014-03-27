@@ -202,7 +202,7 @@ src/lib.rs:
 	test -e src/lib.rs \
 	|| \
 	( \
-		echo -e "#[crate_id = \"\"];\n#[deny(missing_doc)];\n\n//! Documentation goes here.\n" > src/lib.rs \
+		echo -e "#![crate_id = \"\"]\n#![deny(missing_doc)]\n\n//! Documentation goes here.\n" > src/lib.rs \
 	)
 
 clean:
@@ -242,7 +242,7 @@ rusti:
 	) \
 	|| \
 	( \
-		echo -e "#!/bin/sh\n\n#written by mcpherrin\n\nwhile true; do\n  echo -n \" > \"\n  read line\n  TMP=`mktemp`\n  $(COMPILER) - -o \$$TMP <<EOF\n  #[feature(globs, macro_rules, struct_variant)];\n  // extern mod extra;\n  fn main() {\n      let r = { \$$line };\n      println!(\"{:?}\", r);\n  }\nEOF\n  \$$TMP\n  rm \$$TMP\ndone" > rusti.sh \
+		echo -e "#!/bin/sh\n\n#written by mcpherrin\n\nwhile true; do\n  echo -n \" > \"\n  read line\n  TMP=`mktemp`\n  $(COMPILER) - -o \$$TMP <<EOF\n  #![feature(globs, macro_rules, struct_variant)]\n  // extern mod extra;\n  fn main() {\n      let r = { \$$line };\n      println!(\"{:?}\", r);\n  }\nEOF\n  \$$TMP\n  rm \$$TMP\ndone" > rusti.sh \
 		&& chmod +x rusti.sh \
 		&& clear \
 		&& echo "--- Created 'rusti.sh'" \
