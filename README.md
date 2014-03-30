@@ -26,7 +26,7 @@ For example:
 * Need a 'crate_id' for your library
 * Missing documentation annotation
 * A '.gitignore' to avoid rubish in the repository
-* Library binaries should be in 'build' directory
+* Library binaries should be in 'target/cpu-vendor-os/lib' directory
 * Example programs better not be in the 'src' directory
 * Need a "-O" flag to compile optimized code
 * Dependencies, rust-nightly check etc.
@@ -53,7 +53,7 @@ For example:
 4. Type 'make'.  
 
 ```
---- rust-empty (0.1 014)
+--- rust-empty (0.1 015)
 make run 		- Runs executable
 make exe 		- Builds main executable
 make lib 		- Different kinds of libraries
