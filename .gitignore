@@ -2,7 +2,7 @@
 /src/
 /bin/
 /doc/
-/build/
+/target/
 /examples/
 /.rust
 rusti.sh

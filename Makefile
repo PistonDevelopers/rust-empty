@@ -25,11 +25,16 @@ EXAMPLE_FILES = examples/*.rs
 
 COMPILER = rustc
 COMPILER_FLAGS = -O
-RUSTDOC = rustdoc
+RUSTDOC = rustdoc 
+
+# Extracts target from rustc.
+TARGET = $(shell rustc --version | grep "host: " | cut -c 7-)
+# TARGET = x86_64-unknown-linux-gnu
+# TARGET = x86_64-apple-darwin 
 
 all:
 	clear \
-	&& echo "--- rust-empty (0.1 014)" \
+	&& echo "--- rust-empty (0.1 015)" \
 	&& echo "make run 		- Runs executable" \
 	&& echo "make exe 		- Builds main executable" \
 	&& echo "make lib 		- Different kinds of libraries" \
@@ -118,13 +123,13 @@ run: exe
 
 exe: bin src src/main.rs $(shell test -e src/ && find src/ -type f)
 	clear \
-	&& $(COMPILER) $(COMPILER_FLAGS) src/main.rs -o bin/main -L build/ \
+	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) src/main.rs -o bin/main -L "target/$(TARGET)/lib" \
 	&& echo "--- Built executable" \
 	&& echo "--- Type 'make run' to run executable"
 
 test: rlib src bin src/test.rs $(shell test -e src/ && find src/ -type f)
 	clear \
-	&& $(COMPILER) $(COMPILER_FLAGS) --test src/test.rs -o bin/test -L build/ \
+	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --test src/test.rs -o bin/test -L "target/$(TARGET)/lib" \
 	&& echo "--- Built test" \
 	&& ./bin/test
 
@@ -134,9 +139,9 @@ bench: test
 
 lib: rlib
 
-rlib: build src src/lib.rs $(shell test -e src/ && find src/ -type f)
+rlib: target-lib-dir src src/lib.rs $(shell test -e src/ && find src/ -type f)
 	clear \
-	&& $(COMPILER) $(COMPILER_FLAGS) --crate-type=rlib src/lib.rs --out-dir build/ \
+	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --crate-type=rlib src/lib.rs --out-dir "target/$(TARGET)/lib/" \
 	&& clear \
 	&& echo "--- Built rlib" \
 	&& echo "--- Type 'make test' to test library"
@@ -144,8 +149,8 @@ rlib: build src src/lib.rs $(shell test -e src/ && find src/ -type f)
 bin:
 	mkdir -p bin
 
-build:
-	mkdir -p build
+target-lib-dir:
+	mkdir -p "target/$(TARGET)/lib/"
 
 src:
 	mkdir -p src
@@ -171,7 +176,7 @@ git-ignore:
 	) \
 	|| \
 	( \
-		echo -e ".DS_Store\n/bin/\n/doc/\n/build/\n/.rust\nrusti.sh\n" > .gitignore \
+		echo -e ".DS_Store\n/bin/\n/doc/\n/target/\n/.rust\nrusti.sh\n" > .gitignore \
 		&& clear \
 		&& echo "--- Created '.gitignore' for git" \
 		&& cat .gitignore \
@@ -180,7 +185,7 @@ git-ignore:
 examples: $(EXAMPLE_FILES)
 
 $(EXAMPLE_FILES): lib examples-dir
-	$(COMPILER) $(COMPILER_FLAGS) $@ -L build/ --out-dir examples/ \
+	$(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) $@ -L "target/$(TARGET)/lib" --out-dir examples/ \
 	&& clear \
 	&& echo "--- Built examples"
 
@@ -206,7 +211,7 @@ src/lib.rs:
 	)
 
 clean:
-	rm -rf "build/"
+	rm -rf "target/"
 	rm -rf "doc/"
 	rm -f bin/*
 	clear \
@@ -216,7 +221,7 @@ clear-project:
 	rm -f "cargo-lite.conf"
 	rm -f ".travis.yml"
 	rm -f "rusti.sh"
-	rm -rf "build/"
+	rm -rf "target/"
 	rm -rf "src/"
 	rm -rf "bin/"
 	rm -rf "examples/"
