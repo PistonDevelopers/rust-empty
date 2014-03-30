@@ -82,6 +82,7 @@ You can use 'make clear-project' to revert back to just the 'Makefile'.
 
 Rust is a programming language developed at Mozilla Research.  
 
+<a href="https://github.com/bvssvni/rust-empty/issues/35" target="_blank">Rust nightly builds</a>
 <a href="https://en.wikipedia.org/wiki/Rust_%28programming_language%29" target="_blank">Rust at wikipedia</a>  
 <a href="http://www.rust-lang.org/" target="_blank">Official web page</a>  
 <a href="https://github.com/mozilla/rust/wiki/Docs" target="_blank">Documentation at Github wiki</a>  
