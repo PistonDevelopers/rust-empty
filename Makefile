@@ -24,7 +24,12 @@ SHELL := /bin/bash
 EXAMPLE_FILES = examples/*.rs
 
 COMPILER = rustc
-COMPILER_FLAGS = -O
+
+# For release:
+  COMPILER_FLAGS = -O
+# For debugging:
+# COMPILER_FLAGS = -g
+
 RUSTDOC = rustdoc 
 
 # Extracts target from rustc.
