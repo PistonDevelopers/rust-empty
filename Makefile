@@ -39,7 +39,7 @@ TARGET = $(shell rustc --version | grep "host: " | cut -c 7-)
 
 all:
 	clear \
-	&& echo "--- rust-empty (0.1 015)" \
+	&& echo "--- rust-empty (0.1 016)" \
 	&& echo "make run 		- Runs executable" \
 	&& echo "make exe 		- Builds main executable" \
 	&& echo "make lib 		- Different kinds of libraries" \
@@ -124,7 +124,8 @@ doc: src $(shell test -e src/ && find src/ -type f)
 
 run: exe
 	clear \
-	&& ./bin/main
+	&& cd bin/ \
+	&& ./main
 
 exe: bin src src/main.rs $(shell test -e src/ && find src/ -type f)
 	clear \
