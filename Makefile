@@ -21,6 +21,10 @@
 
 SHELL := /bin/bash
 
+# The default make command.
+# Change this to 'make lib' if you are building a library.
+DEFAULT = make help
+
 EXAMPLE_FILES = examples/*.rs
 
 COMPILER = rustc
@@ -37,9 +41,14 @@ TARGET = $(shell rustc --version | grep "host: " | cut -c 7-)
 # TARGET = x86_64-unknown-linux-gnu
 # TARGET = x86_64-apple-darwin 
 
+
+# Change this fl
 all:
+	$(DEFAULT)
+
+help:
 	clear \
-	&& echo "--- rust-empty (0.1 016)" \
+	&& echo "--- rust-empty (0.1 017)" \
 	&& echo "make run 		- Runs executable" \
 	&& echo "make exe 		- Builds main executable" \
 	&& echo "make lib 		- Different kinds of libraries" \
