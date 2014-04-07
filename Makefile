@@ -48,11 +48,12 @@ all:
 
 help:
 	clear \
-	&& echo "--- rust-empty (0.1 017)" \
+	&& echo "--- rust-empty (0.1 018)" \
 	&& echo "make run 		- Runs executable" \
 	&& echo "make exe 		- Builds main executable" \
-	&& echo "make lib 		- Different kinds of libraries" \
+	&& echo "make lib 		- Both static and dynamic library" \
 	&& echo "make rlib 		- Static library" \
+	&& echo "make dylib		- Dynamic library" \
 	&& echo "make test 		- Tests library" \
 	&& echo "make bench 		- Benchmarks library" \
 	&& echo "make doc 		- Builds documentation for library" \
@@ -152,13 +153,24 @@ bench: test
 	clear \
 	&& bin/test --bench
 
-lib: rlib
+lib: rlib dylib
+	clear \
+	&& echo "--- Built rlib" \
+	&& echo "--- Built dylib" \
+	&& echo "--- Type 'make test' to test library"
 
 rlib: target-lib-dir src src/lib.rs $(shell test -e src/ && find src/ -type f)
 	clear \
 	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --crate-type=rlib src/lib.rs --out-dir "target/$(TARGET)/lib/" \
 	&& clear \
 	&& echo "--- Built rlib" \
+	&& echo "--- Type 'make test' to test library"
+
+dylib: target-lib-dir src src/lib.rs $(shell test -e src/ && find src/ -type f)
+	clear \
+	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --crate-type=dylib src/lib.rs --out-dir "target/$(TARGET)/lib/" \
+	&& clear \
+	&& echo "--- Built dylib" \
 	&& echo "--- Type 'make test' to test library"
 
 bin:
