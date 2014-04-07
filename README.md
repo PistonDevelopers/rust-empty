@@ -16,7 +16,7 @@ The Makefile works out of the box on Linux and OSX (with developer tools).
 The setup uses best practices and conventions learned from the Rust community.  
 Pull requests/fixes are welcome!  
 
-*Latest feature: Type 'make loc' to count the lines of code in src folder!*
+*Latest feature: Dynamic libraries is now supported!*
 
 What are these 'best practices'?
 
@@ -53,11 +53,12 @@ For example:
 4. Type 'make'.  
 
 ```
---- rust-empty (0.1 015)
+--- rust-empty (0.1 018)
 make run 		- Runs executable
 make exe 		- Builds main executable
-make lib 		- Different kinds of libraries
+make lib 		- Both static and dynamic library
 make rlib 		- Static library
+make dylib		- Dynamic library
 make test 		- Tests library
 make bench 		- Benchmarks library
 make doc 		- Builds documentation for library
