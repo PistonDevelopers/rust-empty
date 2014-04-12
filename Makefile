@@ -29,6 +29,7 @@ SHELL := /bin/bash
 DEFAULT = make help
 
 EXAMPLE_FILES = examples/*.rs
+SOURCE_FILES = $(shell test -e src/ && find src/ -type f)
 
 COMPILER = rustc
 
@@ -140,7 +141,7 @@ rust-ci-exe: src src/main.rs
 		&& cat .travis.yml \
 	)
 
-doc: src $(shell test -e src/ && find src/ -type f) 
+doc: src $(SOURCE_FILES)
 	clear \
 	&& $(RUSTDOC) src/lib.rs \
 	&& clear \
@@ -151,13 +152,13 @@ run: exe
 	&& cd bin/ \
 	&& ./main
 
-exe: bin src src/main.rs $(shell test -e src/ && find src/ -type f)
+exe: bin src src/main.rs $(SOURCE_FILES)
 	clear \
 	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) src/main.rs -o bin/main -L "target/$(TARGET)/lib" \
 	&& echo "--- Built executable" \
 	&& echo "--- Type 'make run' to run executable"
 
-test: rlib src bin src/test.rs $(shell test -e src/ && find src/ -type f)
+test: rlib src bin src/test.rs $(SOURCE_FILES)
 	clear \
     && $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --test src/test.rs -o bin/test -L "target/$(TARGET)/lib" \
 	&& echo "--- Built test" \
@@ -174,14 +175,14 @@ lib: rlib dylib
 	&& echo "--- Built dylib" \
 	&& echo "--- Type 'make test' to test library"
 
-rlib: target-lib-dir src src/lib.rs $(shell test -e src/ && find src/ -type f)
+rlib: target-lib-dir src src/lib.rs $(SOURCE_FILES)
 	clear \
 	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --crate-type=rlib src/lib.rs --out-dir "target/$(TARGET)/lib/" \
 	&& clear \
 	&& echo "--- Built rlib" \
 	&& echo "--- Type 'make test' to test library"
 
-dylib: target-lib-dir src src/lib.rs $(shell test -e src/ && find src/ -type f)
+dylib: target-lib-dir src src/lib.rs $(SOURCE_FILES)
 	clear \
 	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --crate-type=dylib src/lib.rs --out-dir "target/$(TARGET)/lib/" \
 	&& clear \
