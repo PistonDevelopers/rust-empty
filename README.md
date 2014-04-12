@@ -53,14 +53,18 @@ For example:
 4. Type 'make'.  
 
 ```
---- rust-empty (0.2 000)
+--- rust-empty (0.2 004)
 make run               - Runs executable
 make exe               - Builds main executable
 make lib               - Both static and dynamic library
 make rlib              - Static library
 make dylib             - Dynamic library
-make test              - Tests library
-make bench             - Benchmarks library
+make test              - Tests library internally and externally
+make test-internal     - Tests library internally
+make test-external     - Tests library externally
+make bench             - Benchmarks library internally and externally
+make bench-internal    - Benchmarks library internally
+make bench-external    - Benchmarks library externally
 make doc               - Builds documentation for library
 make git-ignore        - Setup files to be ignored by Git
 make examples          - Builds examples
