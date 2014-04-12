@@ -48,7 +48,7 @@ all:
 
 help:
 	clear \
-	&& echo "--- rust-empty (0.1 018)" \
+	&& echo "--- rust-empty (0.1 019)" \
 	&& echo "make run 		- Runs executable" \
 	&& echo "make exe 		- Builds main executable" \
 	&& echo "make lib 		- Both static and dynamic library" \
@@ -145,9 +145,10 @@ exe: bin src src/main.rs $(shell test -e src/ && find src/ -type f)
 
 test: rlib src bin src/test.rs $(shell test -e src/ && find src/ -type f)
 	clear \
-	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --test src/test.rs -o bin/test -L "target/$(TARGET)/lib" \
+    && $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --test src/test.rs -o bin/test -L "target/$(TARGET)/lib" \
 	&& echo "--- Built test" \
-	&& ./bin/test
+    && cd "bin/" \
+	&& ./test
 
 bench: test
 	clear \
