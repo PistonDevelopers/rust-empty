@@ -16,7 +16,7 @@ The Makefile works out of the box on Linux and OSX (with developer tools).
 The setup uses best practices and conventions learned from the Rust community.  
 Pull requests/fixes are welcome!  
 
-*Latest feature: Dynamic libraries is now supported!*
+*Latest feature: Install/uninstall Rust nightly!*
 
 What are these 'best practices'?
 
@@ -53,26 +53,28 @@ For example:
 4. Type 'make'.  
 
 ```
---- rust-empty (0.1 018)
-make run 		- Runs executable
-make exe 		- Builds main executable
-make lib 		- Both static and dynamic library
-make rlib 		- Static library
-make dylib		- Dynamic library
-make test 		- Tests library
-make bench 		- Benchmarks library
-make doc 		- Builds documentation for library
-make git-ignore 	- Setup files to be ignored by Git
-make examples 		- Builds examples
-make cargo-lite-exe 	- Setup executable package
-make cargo-lite-lib 	- Setup library package
-make rust-ci-lib 	- Setup Travis CI Rust library
-make rust-ci-exe 	- Setup Travis CI Rust executable
-make rusti		- Setup 'rusti.sh' for interactive Rust
-make loc		- Count lines of code in src folder
-make clean 		- Deletes binaries and documentation.
-make clear-project 	- WARNING: Deletes project files except 'Makefile'
-make clear-git 		- WARNING: Deletes Git setup
+--- rust-empty (0.2 000)
+make run               - Runs executable
+make exe               - Builds main executable
+make lib               - Both static and dynamic library
+make rlib              - Static library
+make dylib             - Dynamic library
+make test              - Tests library
+make bench             - Benchmarks library
+make doc               - Builds documentation for library
+make git-ignore        - Setup files to be ignored by Git
+make examples          - Builds examples
+make cargo-lite-exe    - Setup executable package
+make cargo-lite-lib    - Setup library package
+make rust-ci-lib       - Setup Travis CI Rust library
+make rust-ci-exe       - Setup Travis CI Rust executable
+make rusti             - Setup 'rusti.sh' for interactive Rust
+make loc               - Count lines of code in src folder
+make nightly-install   - Installs Rust nightly built
+make nightly-uninstall - Uninstalls Rust nightly built
+make clean             - Deletes binaries and documentation.
+make clear-project     - WARNING: Deletes project files except 'Makefile'
+make clear-git         - WARNING: Deletes Git setup
 ```
 
 All the commands creates the files and folders necessary to compile.  
