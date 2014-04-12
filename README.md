@@ -22,14 +22,14 @@ What are these 'best practices'?
 
 For example:
 
-* Put code in a 'src' directory
-* Need a 'crate_id' for your library
-* Missing documentation annotation
-* A '.gitignore' to avoid rubish in the repository
-* Library binaries should be in 'target/cpu-vendor-os/lib' directory
-* Example programs better not be in the 'src' directory
-* Need a "-O" flag to compile optimized code
-* Dependencies, rust-nightly check etc.
+* Put code in a `src/` directory
+* Add a `crate_id` attribute for your library
+* Deny missing doc attribute for library
+* A `.gitignore` to keep repository clean
+* Library binaries should be in `target/cpu-vendor-os/lib` directory
+* Example programs better not be in the `src/` directory
+* Need a `-O` flag to compile optimized code
+* Dependencies, rust-nightly check through Travis CI etc.
 
 ###Goals
 
@@ -78,8 +78,8 @@ make clear-git         - WARNING: Deletes Git setup
 ```
 
 All the commands creates the files and folders necessary to compile.  
-For example, if you type 'make exe' it will add a hello-world program to 'src/main.rs'.  
-You can use 'make clear-project' to revert back to just the 'Makefile'.  
+For example, if you type `make exe` it will add a hello-world program to `src/main.rs`.  
+You can use `make clear-project` to revert back to just the 'Makefile'.  
 
 ##Introduction To Rust
 
