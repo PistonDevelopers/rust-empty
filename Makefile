@@ -68,8 +68,8 @@ help:
 	&& echo "make rust-ci-exe       - Setup Travis CI Rust executable" \
 	&& echo "make rusti             - Setup 'rusti.sh' for interactive Rust" \
 	&& echo "make loc               - Count lines of code in src folder" \
-    && echo "make nightly-install   - Installs Rust nightly built" \
-    && echo "make nightly-uninstall - Uninstalls Rust nightly built" \
+	&& echo "make nightly-install   - Installs Rust nightly built" \
+	&& echo "make nightly-uninstall - Uninstalls Rust nightly built" \
 	&& echo "make clean             - Deletes binaries and documentation." \
 	&& echo "make clear-project     - WARNING: Deletes project files except 'Makefile'" \
 	&& echo "make clear-git         - WARNING: Deletes Git setup" \
