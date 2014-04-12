@@ -52,13 +52,15 @@ all:
 
 help:
 	clear \
-	&& echo "--- rust-empty (0.2 001)" \
+	&& echo "--- rust-empty (0.2 002)" \
 	&& echo "make run               - Runs executable" \
 	&& echo "make exe               - Builds main executable" \
 	&& echo "make lib               - Both static and dynamic library" \
 	&& echo "make rlib              - Static library" \
 	&& echo "make dylib             - Dynamic library" \
-	&& echo "make test              - Tests library" \
+	&& echo "make test              - Tests library internally and externally" \
+	&& echo "make test-internal     - Tests library internally" \
+	&& echo "make test-external     - Tests library externally" \
 	&& echo "make bench             - Benchmarks library" \
 	&& echo "make doc               - Builds documentation for library" \
 	&& echo "make git-ignore        - Setup files to be ignored by Git" \
@@ -160,9 +162,9 @@ exe: bin src src/main.rs $(SOURCE_FILES)
 
 test: rlib src bin src/test.rs $(SOURCE_FILES)
 	clear \
-    && $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --test src/test.rs -o bin/test -L "target/$(TARGET)/lib" \
+	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --test src/test.rs -o bin/test -L "target/$(TARGET)/lib" \
 	&& echo "--- Built test" \
-    && cd "bin/" \
+	&& cd "bin/" \
 	&& ./test
 
 bench: test
