@@ -48,7 +48,7 @@ all:
 
 help:
 	clear \
-	&& echo "--- rust-empty (0.1 019)" \
+	&& echo "--- rust-empty (0.1 020)" \
 	&& echo "make run 		- Runs executable" \
 	&& echo "make exe 		- Builds main executable" \
 	&& echo "make lib 		- Both static and dynamic library" \
@@ -204,7 +204,7 @@ git-ignore:
 	) \
 	|| \
 	( \
-		echo -e ".DS_Store\n/bin/\n/doc/\n/target/\n/.rust\nrusti.sh\n" > .gitignore \
+		echo -e ".DS_Store\n*~\n*#\n*.o\n*.so\n*.dylib\n*.dSYM\n*.dll\n*.rlib\n*.dummy\n*.exe\n*-test\n/bin/\n/doc/\n/target/\n/build/\n/.rust/\nrusti.sh\n" > .gitignore \
 		&& clear \
 		&& echo "--- Created '.gitignore' for git" \
 		&& cat .gitignore \
