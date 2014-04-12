@@ -51,27 +51,38 @@ all:
 
 help:
 	clear \
-	&& echo "--- rust-empty (0.1 020)" \
-	&& echo "make run 		- Runs executable" \
-	&& echo "make exe 		- Builds main executable" \
-	&& echo "make lib 		- Both static and dynamic library" \
-	&& echo "make rlib 		- Static library" \
-	&& echo "make dylib		- Dynamic library" \
-	&& echo "make test 		- Tests library" \
-	&& echo "make bench 		- Benchmarks library" \
-	&& echo "make doc 		- Builds documentation for library" \
-	&& echo "make git-ignore 	- Setup files to be ignored by Git" \
-	&& echo "make examples 		- Builds examples" \
-	&& echo "make cargo-lite-exe 	- Setup executable package" \
-	&& echo "make cargo-lite-lib 	- Setup library package" \
-	&& echo "make rust-ci-lib 	- Setup Travis CI Rust library" \
-	&& echo "make rust-ci-exe 	- Setup Travis CI Rust executable" \
-	&& echo "make rusti		- Setup 'rusti.sh' for interactive Rust" \
-	&& echo "make loc		- Count lines of code in src folder" \
-	&& echo "make clean 		- Deletes binaries and documentation." \
-	&& echo "make clear-project 	- WARNING: Deletes project files except 'Makefile'" \
-	&& echo "make clear-git 		- WARNING: Deletes Git setup" \
+	&& echo "--- rust-empty (0.1 021)" \
+	&& echo "make run               - Runs executable" \
+	&& echo "make exe               - Builds main executable" \
+	&& echo "make lib               - Both static and dynamic library" \
+	&& echo "make rlib              - Static library" \
+	&& echo "make dylib             - Dynamic library" \
+	&& echo "make test              - Tests library" \
+	&& echo "make bench             - Benchmarks library" \
+	&& echo "make doc               - Builds documentation for library" \
+	&& echo "make git-ignore        - Setup files to be ignored by Git" \
+	&& echo "make examples          - Builds examples" \
+	&& echo "make cargo-lite-exe    - Setup executable package" \
+	&& echo "make cargo-lite-lib    - Setup library package" \
+	&& echo "make rust-ci-lib       - Setup Travis CI Rust library" \
+	&& echo "make rust-ci-exe       - Setup Travis CI Rust executable" \
+	&& echo "make rusti             - Setup 'rusti.sh' for interactive Rust" \
+	&& echo "make loc               - Count lines of code in src folder" \
+    && echo "make nightly-install   - Installs Rust nightly built" \
+    && echo "make nightly-uninstall - Uninstalls Rust nightly built" \
+	&& echo "make clean             - Deletes binaries and documentation." \
+	&& echo "make clear-project     - WARNING: Deletes project files except 'Makefile'" \
+	&& echo "make clear-git         - WARNING: Deletes Git setup" \
 
+.PHONY: clean clear-git clear-project loc nightly-install nightly-uninstall run
+
+nightly-install:
+	cd ~ \
+    && curl -s http://www.rust-lang.org/rustup.sh | sudo sh
+
+nightly-uninstall:
+	cd ~ \
+    && curl -s http://www.rust-lang.org/rustup.sh | sudo sh -s -- --uninstall
 
 cargo-lite-exe: src src/main.rs
 	( \
