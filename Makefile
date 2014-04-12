@@ -52,7 +52,7 @@ all:
 
 help:
 	clear \
-	&& echo "--- rust-empty (0.2 003)" \
+	&& echo "--- rust-empty (0.2 004)" \
 	&& echo "make run               - Runs executable" \
 	&& echo "make exe               - Builds main executable" \
 	&& echo "make lib               - Both static and dynamic library" \
@@ -61,9 +61,9 @@ help:
 	&& echo "make test              - Tests library internally and externally" \
 	&& echo "make test-internal     - Tests library internally" \
 	&& echo "make test-external     - Tests library externally" \
-	&& echo "make bench             - Benchmarks library" \
-	&& echo "make bench-internal    - Benchmarks library" \
-	&& echo "make bench-external    - Benchmarks library" \
+	&& echo "make bench             - Benchmarks library internally and externally" \
+	&& echo "make bench-internal    - Benchmarks library internally" \
+	&& echo "make bench-external    - Benchmarks library externally" \
 	&& echo "make doc               - Builds documentation for library" \
 	&& echo "make git-ignore        - Setup files to be ignored by Git" \
 	&& echo "make examples          - Builds examples" \
