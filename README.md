@@ -85,6 +85,11 @@ All the commands creates the files and folders necessary to compile.
 For example, if you type `make exe` it will add a hello-world program to `src/main.rs`.  
 You can use `make clear-project` to revert back to just the 'Makefile'.  
 
+##Unit Testing & Benchmarking
+
+Internal unit tests and benchmarks are located in the same source as the library, `src/lib.rs`.  
+External unit tests and benchmarks are located in `src/test.rs`.  
+
 ##Introduction To Rust
 
 Rust is a programming language developed at Mozilla Research.  
