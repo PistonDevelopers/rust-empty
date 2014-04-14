@@ -53,7 +53,7 @@ For example:
 4. Type 'make'.  
 
 ```
---- rust-empty (0.2 004)
+--- rust-empty (0.2 005)
 make run               - Runs executable
 make exe               - Builds main executable
 make lib               - Both static and dynamic library
