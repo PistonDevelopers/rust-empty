@@ -52,7 +52,7 @@ all:
 
 help:
 	clear \
-	&& echo "--- rust-empty (0.2 004)" \
+	&& echo "--- rust-empty (0.2 005)" \
 	&& echo "make run               - Runs executable" \
 	&& echo "make exe               - Builds main executable" \
 	&& echo "make lib               - Both static and dynamic library" \
@@ -147,7 +147,7 @@ rust-ci-exe: src src/main.rs
 
 doc: src $(SOURCE_FILES)
 	clear \
-	&& $(RUSTDOC) src/lib.rs \
+	&& $(RUSTDOC) src/lib.rs -L "target/$(TARGET)/lib" \
 	&& clear \
 	&& echo "--- Built documentation"
 
@@ -199,14 +199,14 @@ lib: rlib dylib
 
 rlib: target-lib-dir src src/lib.rs $(SOURCE_FILES)
 	clear \
-	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --crate-type=rlib src/lib.rs --out-dir "target/$(TARGET)/lib/" \
+	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --crate-type=rlib src/lib.rs -L "target/$(TARGET)/lib" --out-dir "target/$(TARGET)/lib/" \
 	&& clear \
 	&& echo "--- Built rlib" \
 	&& echo "--- Type 'make test' to test library"
 
 dylib: target-lib-dir src src/lib.rs $(SOURCE_FILES)
 	clear \
-	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --crate-type=dylib src/lib.rs --out-dir "target/$(TARGET)/lib/" \
+	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --crate-type=dylib src/lib.rs -L "target/$(TARGET)/lib" --out-dir "target/$(TARGET)/lib/" \
 	&& clear \
 	&& echo "--- Built dylib" \
 	&& echo "--- Type 'make test' to test library"
@@ -276,11 +276,10 @@ src/lib.rs:
 	)
 
 clean:
-	rm -rf "target/"
 	rm -rf "doc/"
 	rm -f bin/*
 	clear \
-	&& echo "--- Deleted binaries and documentation"
+	&& echo "--- Deleted bin/* and doc/"
 
 clear-project:
 	rm -f "cargo-lite.conf"
