@@ -45,8 +45,6 @@ TARGET = $(shell rustc --version | grep "host: " | cut -c 7-)
 # TARGET = x86_64-unknown-linux-gnu
 # TARGET = x86_64-apple-darwin 
 
-
-# Change this fl
 all:
 	$(DEFAULT)
 
