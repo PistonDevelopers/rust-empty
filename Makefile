@@ -52,7 +52,7 @@ all:
 
 help:
 	clear \
-	&& echo "--- rust-empty (0.2 007)" \
+	&& echo "--- rust-empty (0.2 008)" \
 	&& echo "make run               - Runs executable" \
 	&& echo "make exe               - Builds main executable" \
 	&& echo "make lib               - Both static and dynamic library" \
@@ -79,7 +79,7 @@ help:
 	&& echo "make clear-project     - WARNING: Deletes project files except 'Makefile'" \
 	&& echo "make clear-git         - WARNING: Deletes Git setup" \
 
-.PHONY: clean clear-git clear-project loc nightly-install nightly-uninstall run
+.PHONY: clean clear-git clear-project loc nightly-install nightly-uninstall run rusti
 
 nightly-install:
 	cd ~ \
