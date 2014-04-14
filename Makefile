@@ -50,7 +50,7 @@ all:
 
 help:
 	clear \
-	&& echo "--- rust-empty (0.2 008)" \
+	&& echo "--- rust-empty (0.2 009)" \
 	&& echo "make run               - Runs executable" \
 	&& echo "make exe               - Builds main executable" \
 	&& echo "make lib               - Both static and dynamic library" \
@@ -301,7 +301,7 @@ clear-git:
 	&& echo "--- Content in project folder" \
 	&& ls -a
 
-rusti:
+rusti: target-lib-dir
 	( \
 		test -e rusti.sh \
 		&& clear \
@@ -309,7 +309,7 @@ rusti:
 	) \
 	|| \
 	( \
-		echo -e "#!/bin/bash\n\n#written by mcpherrin\n\nwhile true; do\n  echo -n \"> \"\n  read line\n  TMP=\"`mktemp r.XXXXXX`\"\n  $(COMPILER) - -o \$$TMP <<EOF\n  #![feature(globs, macro_rules, phase, struct_variant)]\n  extern crate arena;\n  extern crate collections;\n  extern crate flate;\n  #[phase(syntax)] extern crate fourcc;\n  extern crate glob;\n  extern crate green;\n  extern crate hexfloat;\n  extern crate libc;\n  #[phase(syntax, link)] extern crate log;\n  extern crate native;\n  extern crate num;\n  extern crate rand;\n  extern crate rustc;\n  extern crate rustdoc;\n  extern crate rustuv;\n  extern crate semver;\n  extern crate serialize;\n  extern crate sync;\n  extern crate syntax;\n  extern crate term;\n  extern crate test;\n  extern crate time;\n  extern crate url;\n  extern crate uuid;\n  extern crate workcache;\n\n  fn main() {\n      let r = { \$$line };\n      println!(\"{:?}\", r);\n  }\nEOF\n  ./\$$TMP\n  rm \$$TMP\ndone" > rusti.sh \
+		echo -e "#!/bin/bash\n\n#written by mcpherrin\n\nwhile true; do\n  echo -n \"> \"\n  read line\n  TMP=\"`mktemp r.XXXXXX`\"\n  $(COMPILER) - -o \$$TMP -L "target/$(TARGET)/lib/" <<EOF\n  #![feature(globs, macro_rules, phase, struct_variant)]\n  extern crate arena;\n  extern crate collections;\n  extern crate flate;\n  #[phase(syntax)] extern crate fourcc;\n  extern crate glob;\n  extern crate green;\n  extern crate hexfloat;\n  extern crate libc;\n  #[phase(syntax, link)] extern crate log;\n  extern crate native;\n  extern crate num;\n  extern crate rand;\n  extern crate rustc;\n  extern crate rustdoc;\n  extern crate rustuv;\n  extern crate semver;\n  extern crate serialize;\n  extern crate sync;\n  extern crate syntax;\n  extern crate term;\n  extern crate test;\n  extern crate time;\n  extern crate url;\n  extern crate uuid;\n  extern crate workcache;\n\n  fn main() {\n      let r = { \$$line };\n      println!(\"{:?}\", r);\n  }\nEOF\n  ./\$$TMP\n  rm \$$TMP\ndone" > rusti.sh \
 		&& chmod +x rusti.sh \
 		&& clear \
 		&& echo "--- Created 'rusti.sh'" \
