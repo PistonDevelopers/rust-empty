@@ -52,7 +52,7 @@ all:
 
 help:
 	clear \
-	&& echo "--- rust-empty (0.2 005)" \
+	&& echo "--- rust-empty (0.2 006)" \
 	&& echo "make run               - Runs executable" \
 	&& echo "make exe               - Builds main executable" \
 	&& echo "make lib               - Both static and dynamic library" \
@@ -311,7 +311,7 @@ rusti:
 	) \
 	|| \
 	( \
-		echo -e "#!/bin/sh\n\n#written by mcpherrin\n\nwhile true; do\n  echo -n \" > \"\n  read line\n  TMP=`mktemp`\n  $(COMPILER) - -o \$$TMP <<EOF\n  #![feature(globs, macro_rules, struct_variant)]\n  // extern mod extra;\n  fn main() {\n      let r = { \$$line };\n      println!(\"{:?}\", r);\n  }\nEOF\n  \$$TMP\n  rm \$$TMP\ndone" > rusti.sh \
+		echo -e "#!/bin/bash\n\n#written by mcpherrin\n\nwhile true; do\n  echo -n \"> \"\n  read line\n  TMP=\"`mktemp r.XXXXXX`\"\n  $(COMPILER) - -o \$$TMP <<EOF\n  #![feature(globs, macro_rules, struct_variant)]\n  // extern mod extra;\n  fn main() {\n      let r = { \$$line };\n      println!(\"{:?}\", r);\n  }\nEOF\n  ./\$$TMP\n  rm \$$TMP\ndone" > rusti.sh \
 		&& chmod +x rusti.sh \
 		&& clear \
 		&& echo "--- Created 'rusti.sh'" \
