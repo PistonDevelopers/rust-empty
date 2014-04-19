@@ -92,7 +92,7 @@ External unit tests and benchmarks are located in `src/test.rs`.
 
 ##Linking to Libraries
 
-The directory `target/cpu-vendor-platform/lib` is linked by default. If you put Rust libraries in this directory it will link statically if there is an ".rlib" file or dynamically if ".dylib" (OSX), ".so" (Linux) or ".dll" (Window).
+The directory `target/cpu-vendor-os/lib` is linked by default. If you put Rust libraries in this directory it will link statically if there is an ".rlib" file or dynamically if ".dylib" (OSX), ".so" (Linux) or ".dll" (Window).
 
 ##Introduction To Rust
 
