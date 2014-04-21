@@ -156,7 +156,7 @@ run: exe
 
 exe: bin src src/main.rs $(SOURCE_FILES)
 	clear \
-	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) src/main.rs -o bin/main -L "target/$(TARGET)/lib" \
+	&& $(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) src/main.rs -o bin/main -L "target/$(TARGET)/lib" \
 	&& echo "--- Built executable" \
 	&& echo "--- Type 'make run' to run executable"
 
@@ -167,14 +167,14 @@ test: test-internal test-external
 
 test-external: rlib src bin src/test.rs $(SOURCE_FILES)
 	clear \
-	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --test src/test.rs -o bin/test-external -L "target/$(TARGET)/lib" \
+	&& $(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --test src/test.rs -o bin/test-external -L "target/$(TARGET)/lib" \
 	&& echo "--- Built external test runner" \
 	&& cd "bin/" \
 	&& ./test-external
 
 test-internal: rlib src bin $(SOURCE_FILES)
 	clear \
-	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --test src/lib.rs -o bin/test-internal -L "target/$(TARGET)/lib" \
+	&& $(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --test src/lib.rs -o bin/test-internal -L "target/$(TARGET)/lib" \
 	&& echo "--- Built internal test runner" \
 	&& cd "bin/" \
 	&& ./test-internal
@@ -197,14 +197,14 @@ lib: rlib dylib
 
 rlib: target-lib-dir src src/lib.rs $(SOURCE_FILES)
 	clear \
-	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --crate-type=rlib src/lib.rs -L "target/$(TARGET)/lib" --out-dir "target/$(TARGET)/lib/" \
+	&& $(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --crate-type=rlib src/lib.rs -L "target/$(TARGET)/lib" --out-dir "target/$(TARGET)/lib/" \
 	&& clear \
 	&& echo "--- Built rlib" \
 	&& echo "--- Type 'make test' to test library"
 
 dylib: target-lib-dir src src/lib.rs $(SOURCE_FILES)
 	clear \
-	&& $(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) --crate-type=dylib src/lib.rs -L "target/$(TARGET)/lib" --out-dir "target/$(TARGET)/lib/" \
+	&& $(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --crate-type=dylib src/lib.rs -L "target/$(TARGET)/lib" --out-dir "target/$(TARGET)/lib/" \
 	&& clear \
 	&& echo "--- Built dylib" \
 	&& echo "--- Type 'make test' to test library"
@@ -248,7 +248,7 @@ git-ignore:
 examples: $(EXAMPLE_FILES)
 
 $(EXAMPLE_FILES): lib examples-dir
-	$(COMPILER) --target $(TARGET) $(COMPILER_FLAGS) $@ -L "target/$(TARGET)/lib" --out-dir examples/ \
+	$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) $@ -L "target/$(TARGET)/lib" --out-dir examples/ \
 	&& clear \
 	&& echo "--- Built examples"
 
