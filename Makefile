@@ -41,7 +41,7 @@ COMPILER = rustc
 RUSTDOC = rustdoc 
 
 # Extracts target from rustc.
-TARGET = $(shell rustc --version | grep "host: " | cut -c 7-)
+TARGET = $(shell rustc --version | awk "/host:/ { print \$$2 }")
 # TARGET = x86_64-unknown-linux-gnu
 # TARGET = x86_64-apple-darwin 
 
@@ -50,7 +50,7 @@ all:
 
 help:
 	clear \
-	&& echo "--- rust-empty (0.2 009)" \
+	&& echo "--- rust-empty (0.2 010)" \
 	&& echo "make run               - Runs executable" \
 	&& echo "make exe               - Builds main executable" \
 	&& echo "make lib               - Both static and dynamic library" \
