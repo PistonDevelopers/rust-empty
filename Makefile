@@ -61,7 +61,7 @@ all:
 
 help:
 	clear \
-	&& echo "--- rust-empty (0.2 011)" \
+	&& echo "--- rust-empty (0.2 012)" \
 	&& echo "make run               - Runs executable" \
 	&& echo "make exe               - Builds main executable" \
 	&& echo "make lib               - Both static and dynamic library" \
@@ -278,7 +278,7 @@ git-ignore:
 	) \
 	|| \
 	( \
-		echo -e ".DS_Store\n*~\n*#\n*.o\n*.so\n*.swp\n*.dylib\n*.dSYM\n*.dll\n*.rlib\n*.dummy\n*.exe\n*-test\n/bin/\n/doc/\n/target/\n/build/\n/.rust/\nrusti.sh\n" > .gitignore \
+		echo -e ".DS_Store\n*~\n*#\n*.o\n*.so\n*.swp\n*.dylib\n*.dSYM\n*.dll\n*.rlib\n*.dummy\n*.exe\n*-test\n/bin/main\n/bin/test-internal\n/bin/test-external\n/doc/\n/target/\n/build/\n/.rust/\nrusti.sh\n" > .gitignore \
 		&& clear \
 		&& echo "--- Created '.gitignore' for git" \
 		&& cat .gitignore \
@@ -316,7 +316,9 @@ clean:
 	rm -f "$(RLIB)"
 	rm -f "$(DYLIB)"
 	rm -rf "doc/"
-	rm -f bin/*
+	rm -f "bin/main"
+	rm -f "bin/test-internal"
+	rm -f "bin/test-external"
 	clear \
 	&& echo "--- Deleted binaries and documentation"
 
