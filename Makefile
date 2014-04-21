@@ -29,7 +29,7 @@ SHELL := /bin/bash
 DEFAULT = make help
 
 EXAMPLE_FILES = examples/*.rs
-SOURCE_FILES = $(shell test -e src/ && find src/ -type f)
+SOURCE_FILES = $(shell test -e src/ && find src -type f)
 
 COMPILER = rustc
 
@@ -61,7 +61,7 @@ all:
 
 help:
 	clear \
-	&& echo "--- rust-empty (0.2 010)" \
+	&& echo "--- rust-empty (0.2 011)" \
 	&& echo "make run               - Runs executable" \
 	&& echo "make exe               - Builds main executable" \
 	&& echo "make lib               - Both static and dynamic library" \
