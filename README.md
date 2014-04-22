@@ -14,7 +14,7 @@ If you want to contact me, I often hang around in the #rust IRC channel (bvssvni
 3. `make nightly-install`
 4. `make run` to create and run "hello world"
 
-The "hello world" example is created when there is no executable source code.
+The "hello world" example is created when there is no `src/main.rs`.
 
 ##Example 2: New open source library
 
