@@ -7,6 +7,24 @@ Requires Linux or Mac OS X (with developer tools).
 
 If you want to contact me, I often hang around in the #rust IRC channel (bvssvni)
 
+##Example 1: Hello World
+
+1. Copy `Makefile` to a new empty project folder.
+2. Open the Terminal and navigate to the project folder.
+3. `make nightly-install`
+4. `make run` to create and run "hello world"
+
+The "hello world" example is created when there is no executable source code.
+
+##Example 2: New open source library
+
+1. Create new repository on Github.
+3. `git clone <url>`
+4. Copy `Makefile` to the folder.
+5. `make git-ignore`
+6. `make lib`
+7. Change `DEFAULT = make help` to `DEFAULT = make lib`
+
 ##What is Rust-Empty?
 
 Rust-Empty is a user friendly Makefile/Bash setup tool for Rust programmers.  
@@ -53,7 +71,7 @@ For example:
 4. Type 'make'.  
 
 ```
---- rust-empty (0.2 005)
+--- rust-empty (0.2 012)
 make run               - Runs executable
 make exe               - Builds main executable
 make lib               - Both static and dynamic library
