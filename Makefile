@@ -61,7 +61,7 @@ all:
 
 help:
 	clear \
-	&& echo "--- rust-empty (0.2 012)" \
+	&& echo "--- rust-empty (0.3 000)" \
 	&& echo "make run               - Runs executable" \
 	&& echo "make exe               - Builds main executable" \
 	&& echo "make lib               - Both static and dynamic library" \
