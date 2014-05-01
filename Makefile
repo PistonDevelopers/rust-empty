@@ -95,6 +95,8 @@ help:
 		bench \
 		bench-internal \
 		bench-external \
+		cargo-lib \
+		cargo-exe \
 		cargo-lite-lib \
 		cargo-lite-exe \
 		clean \
