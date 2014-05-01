@@ -8,6 +8,5 @@
 rusti.sh
 .travis.yml
 cargo-lite.conf
-
-
+.symlink-info
 *.swp
