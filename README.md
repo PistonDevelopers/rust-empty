@@ -71,7 +71,7 @@ For example:
 4. Type 'make'.  
 
 ```
---- rust-empty (0.2 012)
+--- rust-empty (0.3 000)
 make run               - Runs executable
 make exe               - Builds main executable
 make lib               - Both static and dynamic library
@@ -97,6 +97,7 @@ make nightly-uninstall - Uninstalls Rust nightly built
 make clean             - Deletes binaries and documentation.
 make clear-project     - WARNING: Deletes project files except 'Makefile'
 make clear-git         - WARNING: Deletes Git setup
+make symlink-info      - Symlinked libraries dependency info
 ```
 
 All the commands creates the files and folders necessary to compile.  
