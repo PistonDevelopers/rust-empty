@@ -121,6 +121,8 @@ Using the command `ln -s <from> <to>`, you can link the output file from another
 
 The command `make symlink-info` creates a file `.symlink-info` that contains the file name, current commit, the remote origin url and which remote branches this commit is available.
 
+NOTICE: The `ln -s <from> <to>` for relative file names needs to be executed from the project directory. For example `ln -s ../mylibrary/target/x86_64-apple-darwin/lib/mylib.rlib target/x86_64-apple-darwin/mylib.rlib`. See https://github.com/bvssvni/rust-empty/issues/100
+
 ##Introduction To Rust
 
 Rust is a programming language developed at Mozilla Research.  
