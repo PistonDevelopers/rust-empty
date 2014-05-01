@@ -34,7 +34,7 @@ The Makefile works out of the box on Linux and OSX (with developer tools).
 The setup uses best practices and conventions learned from the Rust community.  
 Pull requests/fixes are welcome!  
 
-*Latest feature: Install/uninstall Rust nightly!*
+*Latest feature: Extracting dependency information from symlinked libraries!*
 
 What are these 'best practices'?
 
