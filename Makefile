@@ -61,7 +61,7 @@ all:
 
 help:
 	clear \
-	&& echo "--- rust-empty (0.3 000)" \
+	&& echo "--- rust-empty (0.3 001)" \
 	&& echo "make run               - Runs executable" \
 	&& echo "make exe               - Builds main executable" \
 	&& echo "make lib               - Both static and dynamic library" \
@@ -78,6 +78,8 @@ help:
 	&& echo "make examples          - Builds examples" \
 	&& echo "make cargo-lite-exe    - Setup executable package" \
 	&& echo "make cargo-lite-lib    - Setup library package" \
+	&& echo "make cargo-exe         - EXPERIMENTAL: Setup executable package" \
+	&& echo "make cargo-lib         - EXPERIMENTAL: Setup library package" \
 	&& echo "make rust-ci-lib       - Setup Travis CI Rust library" \
 	&& echo "make rust-ci-exe       - Setup Travis CI Rust executable" \
 	&& echo "make rusti             - Setup 'rusti.sh' for interactive Rust" \
@@ -142,8 +144,40 @@ cargo-lite-lib: src/lib.rs
 	( \
 		echo -e "deps = [\n]\n\n[build]\ncrate_root = \"src/lib.rs\"\ncrate_type = \"library\"\nrustc_args = []\n" > cargo-lite.conf \
 		&& clear \
-		&& echo "--- Created 'cargo-lite-conf' for library" \
+		&& echo "--- Created 'cargo-lite.conf' for library" \
 		&& cat cargo-lite.conf \
+	)
+
+cargo-exe: src/main.rs
+	( \
+		test -e Cargo.toml \
+		&& clear \
+		&& echo "--- The file 'Cargo.toml' already exists" \
+	) \
+	|| \
+	( \
+		name=$${PWD##/*/} ; \
+		readme=$$((test -e README.md && echo -e "readme = \"README.md\"") || ("")) ; \
+		echo -e "[project]\n\nname = \"$$name\"\nversion = \"0.0\"\n$$readme\nauthors = [\"Your Name <your@email.com>\"]\ntags = []\n\n[[bin]]\n\nname = \"$$name\"\npath = \"bin/main.rs\"\n" > Cargo.toml \
+		&& clear \
+		&& echo "--- Created 'Cargo.toml' for executable" \
+		&& cat Cargo.toml \
+	)
+
+cargo-lib: src/main.rs
+	( \
+		test -e Cargo.toml \
+		&& clear \
+		&& echo "--- The file 'Cargo.toml' already exists" \
+	) \
+	|| \
+	( \
+		name=$${PWD##/*/} ; \
+		readme=$$((test -e README.md && echo -e "readme = \"README.md\"") || ("")) ; \
+		echo -e "[project]\n\nname = \"$$name\"\nversion = \"0.0\"\n$$readme\nauthors = [\"Your Name <your@email.com>\"]\ntags = []\n\n[[lib]]\n\nname = \"$$name\"\npath = \"bin/main.rs\"\n" > Cargo.toml \
+		&& clear \
+		&& echo "--- Created 'Cargo.toml' for executable" \
+		&& cat Cargo.toml \
 	)
 
 rust-ci-lib: src/lib.rs

@@ -10,3 +10,5 @@ rusti.sh
 cargo-lite.conf
 .symlink-info
 *.swp
+
+Cargo.toml
