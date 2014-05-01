@@ -71,7 +71,7 @@ For example:
 4. Type 'make'.  
 
 ```
---- rust-empty (0.3 000)
+--- rust-empty (0.3 002)
 make run               - Runs executable
 make exe               - Builds main executable
 make lib               - Both static and dynamic library
@@ -88,6 +88,8 @@ make git-ignore        - Setup files to be ignored by Git
 make examples          - Builds examples
 make cargo-lite-exe    - Setup executable package
 make cargo-lite-lib    - Setup library package
+make cargo-exe         - EXPERIMENTAL: Setup executable package
+make cargo-lib         - EXPERIMENTAL: Setup library package
 make rust-ci-lib       - Setup Travis CI Rust library
 make rust-ci-exe       - Setup Travis CI Rust executable
 make rusti             - Setup 'rusti.sh' for interactive Rust
