@@ -111,7 +111,13 @@ External unit tests and benchmarks are located in `src/test.rs`.
 
 ##Linking to Libraries
 
-The directory `target/cpu-vendor-os/lib` is linked by default. If you put Rust libraries in this directory it will link statically if there is an ".rlib" file or dynamically if ".dylib" (OSX), ".so" (Linux) or ".dll" (Window).
+The directory `target/cpu-vendor-os/lib/` is linked by default. If you put Rust libraries in this directory it will link statically if there is an ".rlib" file or dynamically if ".dylib" (OSX), ".so" (Linux) or ".dll" (Window).
+
+##Symlinked Libraries
+
+Using the command `ln -s <from> <to>`, you can link the output file from another project to the `target/cpu/vendor-os/lib/` folder.
+
+The command `make symlink-info` creates a file `.symlink-info` that contains the file name, current commit, the remote origin url and which remote branches this commit is available.
 
 ##Introduction To Rust
 
