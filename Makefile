@@ -115,12 +115,32 @@ help:
 		test-external
 
 nightly-install:
-	cd ~ \
-    && curl -s http://www.rust-lang.org/rustup.sh | sudo sh
+	clear \
+	&& cd ~ \
+    && curl -s http://www.rust-lang.org/rustup.sh > rustup.sh \
+	&& ( \
+		echo "Rust install-script stored as '~/rustup.sh'" ; \
+		read -p "Do you want to install? [y/n]:" -n 1 -r ; \
+        echo "" ; \
+		if [[ $$REPLY =~ ^[Yy]$$ ]] ; \
+		then \
+			cat rustup.sh | sudo sh ; \
+		fi \
+	)
 
 nightly-uninstall:
-	cd ~ \
-    && curl -s http://www.rust-lang.org/rustup.sh | sudo sh -s -- --uninstall
+	clear \
+	&& cd ~ \
+    && curl -s http://www.rust-lang.org/rustup.sh > rustup.sh \
+	&& ( \
+		echo "Rust install-script stored as '~/rustup.sh'" ; \
+		read -p "Do you want to uninstall? [y/n]:" -n 1 -r ; \
+        echo "" ; \
+		if [[ $$REPLY =~ ^[Yy]$$ ]] ; \
+		then \
+			cat rustup.sh | sudo sh -s -- --uninstall ; \
+		fi \
+	)
 
 cargo-lite-exe: src/main.rs
 	( \
