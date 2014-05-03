@@ -121,7 +121,7 @@ nightly-install:
 	&& ( \
 		echo "Rust install-script stored as '~/rustup.sh'" ; \
 		read -p "Do you want to install? [y/n]:" -n 1 -r ; \
-        echo "" ; \
+		echo "" ; \
 		if [[ $$REPLY =~ ^[Yy]$$ ]] ; \
 		then \
 			cat rustup.sh | sudo sh ; \
@@ -135,7 +135,7 @@ nightly-uninstall:
 	&& ( \
 		echo "Rust install-script stored as '~/rustup.sh'" ; \
 		read -p "Do you want to uninstall? [y/n]:" -n 1 -r ; \
-        echo "" ; \
+		echo "" ; \
 		if [[ $$REPLY =~ ^[Yy]$$ ]] ; \
 		then \
 			cat rustup.sh | sudo sh -s -- --uninstall ; \
