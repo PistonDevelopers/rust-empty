@@ -61,7 +61,7 @@ all:
 
 help:
 	clear \
-	&& echo "--- rust-empty (0.3 003)" \
+	&& echo "--- rust-empty (0.3 004)" \
 	&& echo "make run               - Runs executable" \
 	&& echo "make exe               - Builds main executable" \
 	&& echo "make lib               - Both static and dynamic library" \
@@ -427,7 +427,7 @@ loc:
 # prints the commit hash with remote branches containing that commit.
 symlink-info:
 	current=$$(pwd) ; \
-	for symlib in $$(find target/*/lib/ -type l) ; do \
+	for symlib in $$(find target/*/lib -type l) ; do \
 		cd $$current ; \
 		echo $$symlib ; \
 		original_file=$$(readlink $$symlib) ; \
