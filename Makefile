@@ -2,19 +2,19 @@
 # https://github.com/bvssvni/rust-empty
 #
 # The MIT License (MIT)
-# 
+#
 # Copyright (c) 2014 Sven Nilsen
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy of
 # this software and associated documentation files (the "Software"), to deal in
 # the Software without restriction, including without limitation the rights to
 # use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
 # the Software, and to permit persons to whom the Software is furnished to do so,
 # subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
 # FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
@@ -38,12 +38,12 @@ COMPILER = rustc
 # For debugging:
 # COMPILER_FLAGS = -g
 
-RUSTDOC = rustdoc 
+RUSTDOC = rustdoc
 
 # Extracts target from rustc.
 TARGET = $(shell rustc --version | awk "/host:/ { print \$$2 }")
 # TARGET = x86_64-unknown-linux-gnu
-# TARGET = x86_64-apple-darwin 
+# TARGET = x86_64-apple-darwin
 
 TARGET_LIB_DIR = target/$(TARGET)/lib/
 
@@ -60,8 +60,7 @@ all:
 	$(DEFAULT)
 
 help:
-	clear \
-	&& echo "--- rust-empty (0.3 005)" \
+	echo "--- rust-empty (0.3 005)" \
 	&& echo "make run               - Runs executable" \
 	&& echo "make exe               - Builds main executable" \
 	&& echo "make lib               - Both static and dynamic library" \
@@ -115,8 +114,7 @@ help:
 		test-external
 
 nightly-install:
-	clear \
-	&& cd ~ \
+	cd ~ \
 	&& curl -s http://www.rust-lang.org/rustup.sh > rustup.sh \
 	&& ( \
 		echo "Rust install-script stored as '~/rustup.sh'" ; \
@@ -129,8 +127,7 @@ nightly-install:
 	)
 
 nightly-uninstall:
-	clear \
-	&& cd ~ \
+	cd ~ \
 	&& curl -s http://www.rust-lang.org/rustup.sh > rustup.sh \
 	&& ( \
 		echo "Rust install-script stored as '~/rustup.sh'" ; \
@@ -145,13 +142,11 @@ nightly-uninstall:
 cargo-lite-exe: src/main.rs
 	( \
 		test -e cargo-lite.conf \
-		&& clear \
 		&& echo "--- The file 'cargo-lite.conf' already exists" \
 	) \
 	|| \
 	( \
 		echo -e "deps = [\n]\n\n[build]\ncrate_root = \"src/main.rs\"\nrustc_args = []\n" > cargo-lite.conf \
-		&& clear \
 		&& echo "--- Created 'cargo-lite.conf' for executable" \
 		&& cat cargo-lite.conf \
 	)
@@ -159,13 +154,11 @@ cargo-lite-exe: src/main.rs
 cargo-lite-lib: src/lib.rs
 	( \
 		test -e cargo-lite.conf \
-		&& clear \
 		&& echo "--- The file 'cargo-lite.conf' already exists" \
 	) \
 	|| \
 	( \
 		echo -e "deps = [\n]\n\n[build]\ncrate_root = \"src/lib.rs\"\ncrate_type = \"library\"\nrustc_args = []\n" > cargo-lite.conf \
-		&& clear \
 		&& echo "--- Created 'cargo-lite.conf' for library" \
 		&& cat cargo-lite.conf \
 	)
@@ -173,7 +166,6 @@ cargo-lite-lib: src/lib.rs
 cargo-exe: src/main.rs
 	( \
 		test -e Cargo.toml \
-		&& clear \
 		&& echo "--- The file 'Cargo.toml' already exists" \
 	) \
 	|| \
@@ -181,7 +173,6 @@ cargo-exe: src/main.rs
 		name=$${PWD##/*/} ; \
 		readme=$$((test -e README.md && echo -e "readme = \"README.md\"") || ("")) ; \
 		echo -e "[project]\n\nname = \"$$name\"\nversion = \"0.0\"\n$$readme\nauthors = [\"Your Name <your@email.com>\"]\ntags = []\n\n[[bin]]\n\nname = \"$$name\"\npath = \"bin/main.rs\"\n" > Cargo.toml \
-		&& clear \
 		&& echo "--- Created 'Cargo.toml' for executable" \
 		&& cat Cargo.toml \
 	)
@@ -189,7 +180,6 @@ cargo-exe: src/main.rs
 cargo-lib: src/main.rs
 	( \
 		test -e Cargo.toml \
-		&& clear \
 		&& echo "--- The file 'Cargo.toml' already exists" \
 	) \
 	|| \
@@ -197,7 +187,6 @@ cargo-lib: src/main.rs
 		name=$${PWD##/*/} ; \
 		readme=$$((test -e README.md && echo -e "readme = \"README.md\"") || ("")) ; \
 		echo -e "[project]\n\nname = \"$$name\"\nversion = \"0.0\"\n$$readme\nauthors = [\"Your Name <your@email.com>\"]\ntags = []\n\n[[lib]]\n\nname = \"$$name\"\npath = \"bin/lib.rs\"\n" > Cargo.toml \
-		&& clear \
 		&& echo "--- Created 'Cargo.toml' for executable" \
 		&& cat Cargo.toml \
 	)
@@ -205,13 +194,11 @@ cargo-lib: src/main.rs
 rust-ci-lib: src/lib.rs
 	( \
 		test -e .travis.yml \
-		&& clear \
 		&& echo "--- The file '.travis.yml' already exists" \
 	) \
 	|| \
 	( \
 		echo -e "before_install:\n\t- yes | sudo add-apt-repository ppa:hansjorg/rust\n\t- sudo apt-get update\ninstall:\n\t- sudo apt-get install rust-nightly\nscript:\n\t- make lib\n" > .travis.yml \
-		&& clear \
 		&& echo "--- Created '.travis.yml' for library" \
 		&& cat .travis.yml \
 	)
@@ -219,39 +206,32 @@ rust-ci-lib: src/lib.rs
 rust-ci-exe: src/main.rs
 	( \
 		test -e .travis.yml \
-		&& clear \
 		&& echo "--- The file '.travis.yml' already exists" \
 	) \
 	|| \
 	( \
 		echo -e "before_install:\n\t- yes | sudo add-apt-repository ppa:hansjorg/rust\n\t- sudo apt-get update\ninstall:\n\t- sudo apt-get install rust-nightly\nscript:\n\t- make exe\n" > .travis.yml \
-		&& clear \
 		&& echo "--- Created '.travis.yml' for executable" \
 		&& cat .travis.yml \
 	)
 
 doc: $(SOURCE_FILES) | src/
-	clear \
-	&& $(RUSTDOC) src/lib.rs -L "target/$(TARGET)/lib" \
-	&& clear \
+	$(RUSTDOC) src/lib.rs -L "target/$(TARGET)/lib" \
 	&& echo "--- Built documentation"
 
 run: exe
-	clear \
-	&& cd bin/ \
+	cd bin/ \
 	&& ./main
 
-exe: bin/main | $(TARGET_LIB_DIR) 
+exe: bin/main | $(TARGET_LIB_DIR)
 
 bin/main: $(SOURCE_FILES) | bin/ src/main.rs
-	clear \
-	&& $(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) src/main.rs -o bin/main -L "target/$(TARGET)/lib" \
+	$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) src/main.rs -o bin/main -L "target/$(TARGET)/lib" \
 	&& echo "--- Built executable" \
 	&& echo "--- Type 'make run' to run executable"
 
 test: test-internal test-external
-	clear \
-	&& echo "--- Internal tests succeeded" \
+	echo "--- Internal tests succeeded" \
 	&& echo "--- External tests succeeded"
 
 test-external: bin/test-external
@@ -259,8 +239,7 @@ test-external: bin/test-external
 	&& ./test-external
 
 bin/test-external: $(SOURCE_FILES) | rlib bin/ src/test.rs
-	clear \
-	&& $(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --test src/test.rs -o bin/test-external -L "target/$(TARGET)/lib" \
+	$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --test src/test.rs -o bin/test-external -L "target/$(TARGET)/lib" \
 	&& echo "--- Built external test runner"
 
 test-internal: bin/test-internal
@@ -268,41 +247,33 @@ test-internal: bin/test-internal
 	&& ./test-internal
 
 bin/test-internal: $(SOURCE_FILES) | rlib src/ bin/
-	clear \
-	&& $(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --test src/lib.rs -o bin/test-internal -L "target/$(TARGET)/lib" \
+	$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --test src/lib.rs -o bin/test-internal -L "target/$(TARGET)/lib" \
 	&& echo "--- Built internal test runner"
 
 bench: bench-internal bench-external
 
 bench-external: test-external
-	clear \
-	&& bin/test-external --bench
+	bin/test-external --bench
 
 bench-internal: test-internal
-	clear \
-	&& bin/test-internal --bench
+	bin/test-internal --bench
 
 lib: rlib dylib
-	clear \
-	&& echo "--- Built rlib" \
+	echo "--- Built rlib" \
 	&& echo "--- Built dylib" \
 	&& echo "--- Type 'make test' to test library"
 
 rlib: $(RLIB)
 
 $(RLIB): $(SOURCE_FILES) | src/lib.rs $(TARGET_LIB_DIR)
-	clear \
-	&& $(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --crate-type=rlib src/lib.rs -L "target/$(TARGET)/lib" --out-dir "target/$(TARGET)/lib/" \
-	&& clear \
+	$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --crate-type=rlib src/lib.rs -L "target/$(TARGET)/lib" --out-dir "target/$(TARGET)/lib/" \
 	&& echo "--- Built rlib" \
 	&& echo "--- Type 'make test' to test library"
 
 dylib: $(DYLIB)
 
 $(DYLIB): $(SOURCE_FILES) | src/lib.rs $(TARGET_LIB_DIR)
-	clear \
-	&& $(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --crate-type=dylib src/lib.rs -L "target/$(TARGET)/lib" --out-dir "target/$(TARGET)/lib/" \
-	&& clear \
+	$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --crate-type=dylib src/lib.rs -L "target/$(TARGET)/lib" --out-dir "target/$(TARGET)/lib/" \
 	&& echo "--- Built dylib" \
 	&& echo "--- Type 'make test' to test library"
 
@@ -321,7 +292,6 @@ examples-dir:
 	( \
 		mkdir examples \
 		&& echo -e "fn main() {\n\tprintln!(\"Hello!\");\n}\n" > examples/hello.rs \
-		&& clear \
 		&& echo "--- Created examples folder" \
 	)
 
@@ -331,13 +301,11 @@ rust-dir:
 git-ignore:
 	( \
 		test -e .gitignore \
-		&& clear \
 		&& echo "--- The file '.gitignore' already exists" \
 	) \
 	|| \
 	( \
 		echo -e ".DS_Store\n*~\n*#\n*.o\n*.so\n*.swp\n*.dylib\n*.dSYM\n*.dll\n*.rlib\n*.dummy\n*.exe\n*-test\n/bin/main\n/bin/test-internal\n/bin/test-external\n/doc/\n/target/\n/build/\n/.rust/\nrusti.sh\n" > .gitignore \
-		&& clear \
 		&& echo "--- Created '.gitignore' for git" \
 		&& cat .gitignore \
 	)
@@ -346,7 +314,6 @@ examples: $(EXAMPLE_FILES)
 
 $(EXAMPLE_FILES): lib examples-dir
 	$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) $@ -L "target/$(TARGET)/lib" --out-dir examples/ \
-	&& clear \
 	&& echo "--- Built examples"
 
 src/main.rs: | src/
@@ -377,8 +344,7 @@ clean:
 	rm -f "bin/main"
 	rm -f "bin/test-internal"
 	rm -f "bin/test-external"
-	clear \
-	&& echo "--- Deleted binaries and documentation"
+	echo "--- Deleted binaries and documentation"
 
 clear-project:
 	rm -f ".symlink-info"
@@ -390,37 +356,32 @@ clear-project:
 	rm -rf "bin/"
 	rm -rf "examples/"
 	rm -rf "doc/"
-	clear \
-	&& echo "--- Removed all source files, binaries and documentation" \
+	echo "--- Removed all source files, binaries and documentation" \
 	&& echo "--- Content in project folder" \
 	&& ls -a
 
 clear-git:
 	rm -f ".gitignore"
 	rm -rf ".git"
-	clear \
-	&& echo "--- Removed Git" \
+	echo "--- Removed Git" \
 	&& echo "--- Content in project folder" \
 	&& ls -a
 
 rusti: $(TARGET_LIB_DIR)
 	( \
 		test -e rusti.sh \
-		&& clear \
 		&& echo "--- The file 'rusti.sh' already exists" \
 	) \
 	|| \
 	( \
 		echo -e "#!/bin/bash\n\n#written by mcpherrin\n\nwhile true; do\n  echo -n \"> \"\n  read line\n  TMP=\"`mktemp r.XXXXXX`\"\n  $(COMPILER) - -o \$$TMP -L "target/$(TARGET)/lib/" <<EOF\n  #![feature(globs, macro_rules, phase, struct_variant)]\n  extern crate arena;\n  extern crate collections;\n  extern crate flate;\n  #[phase(syntax)] extern crate fourcc;\n  extern crate glob;\n  extern crate green;\n  extern crate hexfloat;\n  extern crate libc;\n  #[phase(syntax, link)] extern crate log;\n  extern crate native;\n  extern crate num;\n  extern crate rand;\n  extern crate rustc;\n  extern crate rustdoc;\n  extern crate rustuv;\n  extern crate semver;\n  extern crate serialize;\n  extern crate sync;\n  extern crate syntax;\n  extern crate term;\n  extern crate test;\n  extern crate time;\n  extern crate url;\n  extern crate uuid;\n  extern crate workcache;\n\n  fn main() {\n      let r = { \$$line };\n      println!(\"{:?}\", r);\n  }\nEOF\n  ./\$$TMP\n  rm \$$TMP\ndone" > rusti.sh \
 		&& chmod +x rusti.sh \
-		&& clear \
 		&& echo "--- Created 'rusti.sh'" \
 		&& echo "--- Type './rusti.sh' to start interactive Rust" \
 	)
 
 loc:
-	clear \
-	&& echo "--- Counting lines of .rs files in 'src' (LOC):" \
+	echo "--- Counting lines of .rs files in 'src' (LOC):" \
 	&& find src/ -type f -name "*.rs" -exec cat {} \; | wc -l
 
 # Finds the original locations of symlinked libraries and
@@ -441,7 +402,5 @@ symlink-info:
 	done \
 	> .symlink-info \
 	&& cd $$current \
-	&& clear \
 	&& echo "--- Created '.symlink-info'" \
 	&& cat .symlink-info
-
