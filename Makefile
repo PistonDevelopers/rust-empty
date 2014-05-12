@@ -61,7 +61,7 @@ all:
 
 help:
 	clear \
-	&& echo "--- rust-empty (0.3 004)" \
+	&& echo "--- rust-empty (0.3 005)" \
 	&& echo "make run               - Runs executable" \
 	&& echo "make exe               - Builds main executable" \
 	&& echo "make lib               - Both static and dynamic library" \
@@ -241,7 +241,7 @@ run: exe
 	&& cd bin/ \
 	&& ./main
 
-exe: bin/main
+exe: bin/main | $(TARGET_LIB_DIR) 
 
 bin/main: $(SOURCE_FILES) | bin/ src/main.rs
 	clear \
