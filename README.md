@@ -34,7 +34,7 @@ The Makefile works out of the box on Linux and OSX (with developer tools).
 The setup uses best practices and conventions learned from the Rust community.  
 Pull requests/fixes are welcome!  
 
-*Latest feature: Experimental Cargo support!*
+*Latest feature: No clearing of Terminal!*
 
 What are these 'best practices'?
 
