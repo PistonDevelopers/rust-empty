@@ -68,7 +68,7 @@ For example:
 1. Create a new empty folder for your project.  
 2. Copy 'Makefile' to the project folder.  
 3. Open the Terminal window and navigate to the project folder.  
-4. Type 'make'.  
+4. Type 'make help'.  
 
 ```
 --- rust-empty (0.3 002)
