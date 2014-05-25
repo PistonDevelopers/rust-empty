@@ -368,6 +368,55 @@ clear-git:
 	&& echo "--- Content in project folder" \
 	&& ls -a
 
+# borrowed from http://stackoverflow.com/q/649246/1256624
+define RUSTI_SCRIPT
+#!/bin/bash
+
+#written by mcpherrin
+
+while true; do
+  echo -n "> "
+  read line
+  TMP="`mktemp r.XXXXXX`"
+  $(COMPILER) - -o \$$TMP -L "target/$(TARGET)/lib/" <<EOF
+  #![feature(globs, macro_rules, phase, struct_variant)]
+  extern crate arena;
+  extern crate collections;
+  extern crate flate;
+  #[phase(syntax)] extern crate fourcc;
+  extern crate glob;
+  extern crate green;
+  extern crate hexfloat;
+  extern crate libc;
+  #[phase(syntax, link)] extern crate log;
+  extern crate native;
+  extern crate num;
+  extern crate rand;
+  extern crate rustc;
+  extern crate rustdoc;
+  extern crate rustuv;
+  extern crate semver;
+  extern crate serialize;
+  extern crate sync;
+  extern crate syntax;
+  extern crate term;
+  extern crate test;
+  extern crate time;
+  extern crate url;
+  extern crate uuid;
+  extern crate workcache;
+
+  fn main() {
+      let r = { \$$line };
+      println!("{:?}", r);
+  }
+EOF
+  ./\$$TMP
+  rm \$$TMP
+done
+endef
+export RUSTI_SCRIPT
+
 rusti: $(TARGET_LIB_DIR)
 	$(Q)( \
 		test -e rusti.sh \
@@ -375,7 +424,7 @@ rusti: $(TARGET_LIB_DIR)
 	) \
 	|| \
 	( \
-		echo -e "#!/bin/bash\n\n#written by mcpherrin\n\nwhile true; do\n  echo -n \"> \"\n  read line\n  TMP=\"`mktemp r.XXXXXX`\"\n  $(COMPILER) - -o \$$TMP -L "target/$(TARGET)/lib/" <<EOF\n  #![feature(globs, macro_rules, phase, struct_variant)]\n  extern crate arena;\n  extern crate collections;\n  extern crate flate;\n  #[phase(syntax)] extern crate fourcc;\n  extern crate glob;\n  extern crate green;\n  extern crate hexfloat;\n  extern crate libc;\n  #[phase(syntax, link)] extern crate log;\n  extern crate native;\n  extern crate num;\n  extern crate rand;\n  extern crate rustc;\n  extern crate rustdoc;\n  extern crate rustuv;\n  extern crate semver;\n  extern crate serialize;\n  extern crate sync;\n  extern crate syntax;\n  extern crate term;\n  extern crate test;\n  extern crate time;\n  extern crate url;\n  extern crate uuid;\n  extern crate workcache;\n\n  fn main() {\n      let r = { \$$line };\n      println!(\"{:?}\", r);\n  }\nEOF\n  ./\$$TMP\n  rm \$$TMP\ndone" > rusti.sh \
+		echo -e "$$RUSTI_SCRIPT" > rusti.sh \
 		&& chmod +x rusti.sh \
 		&& echo "--- Created 'rusti.sh'" \
 		&& echo "--- Type './rusti.sh' to start interactive Rust" \
