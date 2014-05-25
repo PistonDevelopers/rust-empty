@@ -25,8 +25,8 @@
 SHELL := /bin/bash
 
 # The default make command.
-# Change this to 'make lib' if you are building a library.
-DEFAULT = make help
+# Change this to 'lib' if you are building a library.
+DEFAULT = help
 
 EXAMPLE_FILES = examples/*.rs
 SOURCE_FILES = $(shell test -e src/ && find src -type f)
@@ -62,8 +62,7 @@ else
   Q := @
 endif
 
-all:
-	$(DEFAULT)
+all: $(DEFAULT)
 
 help:
 	$(Q)echo "--- rust-empty (0.3 005)" \
