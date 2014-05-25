@@ -56,11 +56,17 @@ RLIB = target/$(TARGET)/lib/$(RLIB_FILE)
 DYLIB_FILE = $(shell (rustc --crate-type=dylib --crate-file-name "src/lib.rs" 2> /dev/null) || (echo "dummy.dylib"))
 DYLIB = target/$(TARGET)/lib/$(DYLIB_FILE)
 
+ifdef VERBOSE
+  Q :=
+else
+  Q := @
+endif
+
 all:
 	$(DEFAULT)
 
 help:
-	@echo "--- rust-empty (0.3 005)" \
+	$(Q)echo "--- rust-empty (0.3 005)" \
 	&& echo "make run               - Runs executable" \
 	&& echo "make exe               - Builds main executable" \
 	&& echo "make lib               - Both static and dynamic library" \
@@ -114,7 +120,7 @@ help:
 		test-external
 
 nightly-install:
-	@cd ~ \
+	$(Q)cd ~ \
 	&& curl -s http://www.rust-lang.org/rustup.sh > rustup.sh \
 	&& ( \
 		echo "Rust install-script stored as '~/rustup.sh'" ; \
@@ -127,7 +133,7 @@ nightly-install:
 	)
 
 nightly-uninstall:
-	@cd ~ \
+	$(Q)cd ~ \
 	&& curl -s http://www.rust-lang.org/rustup.sh > rustup.sh \
 	&& ( \
 		echo "Rust install-script stored as '~/rustup.sh'" ; \
@@ -140,7 +146,7 @@ nightly-uninstall:
 	)
 
 cargo-lite-exe: src/main.rs
-	@( \
+	$(Q)( \
 		test -e cargo-lite.conf \
 		&& echo "--- The file 'cargo-lite.conf' already exists" \
 	) \
@@ -152,7 +158,7 @@ cargo-lite-exe: src/main.rs
 	)
 
 cargo-lite-lib: src/lib.rs
-	@( \
+	$(Q)( \
 		test -e cargo-lite.conf \
 		&& echo "--- The file 'cargo-lite.conf' already exists" \
 	) \
@@ -164,7 +170,7 @@ cargo-lite-lib: src/lib.rs
 	)
 
 cargo-exe: src/main.rs
-	@( \
+	$(Q)( \
 		test -e Cargo.toml \
 		&& echo "--- The file 'Cargo.toml' already exists" \
 	) \
@@ -178,7 +184,7 @@ cargo-exe: src/main.rs
 	)
 
 cargo-lib: src/main.rs
-	@( \
+	$(Q)( \
 		test -e Cargo.toml \
 		&& echo "--- The file 'Cargo.toml' already exists" \
 	) \
@@ -192,7 +198,7 @@ cargo-lib: src/main.rs
 	)
 
 rust-ci-lib: src/lib.rs
-	@( \
+	$(Q)( \
 		test -e .travis.yml \
 		&& echo "--- The file '.travis.yml' already exists" \
 	) \
@@ -204,7 +210,7 @@ rust-ci-lib: src/lib.rs
 	)
 
 rust-ci-exe: src/main.rs
-	@( \
+	$(Q)( \
 		test -e .travis.yml \
 		&& echo "--- The file '.travis.yml' already exists" \
 	) \
@@ -216,74 +222,74 @@ rust-ci-exe: src/main.rs
 	)
 
 doc: $(SOURCE_FILES) | src/
-	@$(RUSTDOC) src/lib.rs -L "target/$(TARGET)/lib" \
+	$(Q)$(RUSTDOC) src/lib.rs -L "target/$(TARGET)/lib" \
 	&& echo "--- Built documentation"
 
 run: exe
-	@cd bin/ \
+	$(Q)cd bin/ \
 	&& ./main
 
 exe: bin/main | $(TARGET_LIB_DIR)
 
 bin/main: $(SOURCE_FILES) | bin/ src/main.rs
-	@$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) src/main.rs -o bin/main -L "target/$(TARGET)/lib" \
+	$(Q)$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) src/main.rs -o bin/main -L "target/$(TARGET)/lib" \
 	&& echo "--- Built executable" \
 	&& echo "--- Type 'make run' to run executable"
 
 test: test-internal test-external
-	@echo "--- Internal tests succeeded" \
+	$(Q)echo "--- Internal tests succeeded" \
 	&& echo "--- External tests succeeded"
 
 test-external: bin/test-external
-	@cd "bin/" \
+	$(Q)cd "bin/" \
 	&& ./test-external
 
 bin/test-external: $(SOURCE_FILES) | rlib bin/ src/test.rs
-	@$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --test src/test.rs -o bin/test-external -L "target/$(TARGET)/lib" \
+	$(Q)$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --test src/test.rs -o bin/test-external -L "target/$(TARGET)/lib" \
 	&& echo "--- Built external test runner"
 
 test-internal: bin/test-internal
-	@cd "bin/" \
+	$(Q)cd "bin/" \
 	&& ./test-internal
 
 bin/test-internal: $(SOURCE_FILES) | rlib src/ bin/
-	@$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --test src/lib.rs -o bin/test-internal -L "target/$(TARGET)/lib" \
+	$(Q)$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --test src/lib.rs -o bin/test-internal -L "target/$(TARGET)/lib" \
 	&& echo "--- Built internal test runner"
 
 bench: bench-internal bench-external
 
 bench-external: test-external
-	@bin/test-external --bench
+	$(Q)bin/test-external --bench
 
 bench-internal: test-internal
-	@bin/test-internal --bench
+	$(Q)bin/test-internal --bench
 
 lib: rlib dylib
-	@echo "--- Type 'make test' to test library"
+	$(Q)echo "--- Type 'make test' to test library"
 
 rlib: $(RLIB)
 
 $(RLIB): $(SOURCE_FILES) | src/lib.rs $(TARGET_LIB_DIR)
-	@$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --crate-type=rlib src/lib.rs -L "target/$(TARGET)/lib" --out-dir "target/$(TARGET)/lib/" \
+	$(Q)$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --crate-type=rlib src/lib.rs -L "target/$(TARGET)/lib" --out-dir "target/$(TARGET)/lib/" \
 	&& echo "--- Built rlib"
 
 dylib: $(DYLIB)
 
 $(DYLIB): $(SOURCE_FILES) | src/lib.rs $(TARGET_LIB_DIR)
-	@$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --crate-type=dylib src/lib.rs -L "target/$(TARGET)/lib" --out-dir "target/$(TARGET)/lib/" \
+	$(Q)$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) --crate-type=dylib src/lib.rs -L "target/$(TARGET)/lib" --out-dir "target/$(TARGET)/lib/" \
 	&& echo "--- Built dylib"
 
 bin:
-	@mkdir -p bin
+	$(Q)mkdir -p bin
 
 $(TARGET_LIB_DIR):
-	@mkdir -p $(TARGET_LIB_DIR)
+	$(Q)mkdir -p $(TARGET_LIB_DIR)
 
 src:
-	@mkdir -p src
+	$(Q)mkdir -p src
 
 examples-dir:
-	@test -e examples \
+	$(Q)test -e examples \
 	|| \
 	( \
 		mkdir examples \
@@ -292,10 +298,10 @@ examples-dir:
 	)
 
 rust-dir:
-	@mkdir -p .rust
+	$(Q)mkdir -p .rust
 
 git-ignore:
-	@( \
+	$(Q)( \
 		test -e .gitignore \
 		&& echo "--- The file '.gitignore' already exists" \
 	) \
@@ -309,62 +315,62 @@ git-ignore:
 examples: $(EXAMPLE_FILES)
 
 $(EXAMPLE_FILES): lib examples-dir
-	@$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) $@ -L "target/$(TARGET)/lib" --out-dir examples/ \
+	$(Q)$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) $@ -L "target/$(TARGET)/lib" --out-dir examples/ \
 	&& echo "--- Built examples"
 
 src/main.rs: | src/
-	@test -e src/main.rs \
+	$(Q)test -e src/main.rs \
 	|| \
 	( \
 		echo -e "fn main() {\n\tprintln!(\"Hello world!\");\n}" > src/main.rs \
 	)
 
 src/test.rs: | src/
-	@test -e src/test.rs \
+	$(Q)test -e src/test.rs \
 	|| \
 	( \
 		touch src/test.rs \
 	)
 
 src/lib.rs: | src/
-	@test -e src/lib.rs \
+	$(Q)test -e src/lib.rs \
 	|| \
 	( \
 		echo -e "#![crate_id = \"\"]\n#![deny(missing_doc)]\n\n//! Documentation goes here.\n" > src/lib.rs \
 	)
 
 clean:
-	@rm -f "$(RLIB)"
-	@rm -f "$(DYLIB)"
-	@rm -rf "doc/"
-	@rm -f "bin/main"
-	@rm -f "bin/test-internal"
-	@rm -f "bin/test-external"
-	@echo "--- Deleted binaries and documentation"
+	$(Q)rm -f "$(RLIB)"
+	$(Q)rm -f "$(DYLIB)"
+	$(Q)rm -rf "doc/"
+	$(Q)rm -f "bin/main"
+	$(Q)rm -f "bin/test-internal"
+	$(Q)rm -f "bin/test-external"
+	$(Q)echo "--- Deleted binaries and documentation"
 
 clear-project:
-	@rm -f ".symlink-info"
-	@rm -f "cargo-lite.conf"
-	@rm -f ".travis.yml"
-	@rm -f "rusti.sh"
-	@rm -rf "target/"
-	@rm -rf "src/"
-	@rm -rf "bin/"
-	@rm -rf "examples/"
-	@rm -rf "doc/"
-	@echo "--- Removed all source files, binaries and documentation" \
+	$(Q)rm -f ".symlink-info"
+	$(Q)rm -f "cargo-lite.conf"
+	$(Q)rm -f ".travis.yml"
+	$(Q)rm -f "rusti.sh"
+	$(Q)rm -rf "target/"
+	$(Q)rm -rf "src/"
+	$(Q)rm -rf "bin/"
+	$(Q)rm -rf "examples/"
+	$(Q)rm -rf "doc/"
+	$(Q)echo "--- Removed all source files, binaries and documentation" \
 	&& echo "--- Content in project folder" \
 	&& ls -a
 
 clear-git:
-	@rm -f ".gitignore"
-	@rm -rf ".git"
-	@echo "--- Removed Git" \
+	$(Q)rm -f ".gitignore"
+	$(Q)rm -rf ".git"
+	$(Q)echo "--- Removed Git" \
 	&& echo "--- Content in project folder" \
 	&& ls -a
 
 rusti: $(TARGET_LIB_DIR)
-	@( \
+	$(Q)( \
 		test -e rusti.sh \
 		&& echo "--- The file 'rusti.sh' already exists" \
 	) \
@@ -377,13 +383,13 @@ rusti: $(TARGET_LIB_DIR)
 	)
 
 loc:
-	@echo "--- Counting lines of .rs files in 'src' (LOC):" \
+	$(Q)echo "--- Counting lines of .rs files in 'src' (LOC):" \
 	&& find src/ -type f -name "*.rs" -exec cat {} \; | wc -l
 
 # Finds the original locations of symlinked libraries and
 # prints the commit hash with remote branches containing that commit.
 symlink-info:
-	@current=$$(pwd) ; \
+	$(Q)	current=$$(pwd) ; \
 	for symlib in $$(find target/*/lib -type l) ; do \
 		cd $$current ; \
 		echo $$symlib ; \
