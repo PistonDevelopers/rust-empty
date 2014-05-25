@@ -378,7 +378,7 @@ while true; do
   echo -n "> "
   read line
   TMP="`mktemp r.XXXXXX`"
-  $(COMPILER) - -o \$$TMP -L "target/$(TARGET)/lib/" <<EOF
+  $(COMPILER) - -o $$TMP -L "target/$(TARGET)/lib/" <<EOF
   #![feature(globs, macro_rules, phase, struct_variant)]
   extern crate arena;
   extern crate collections;
@@ -407,12 +407,12 @@ while true; do
   extern crate workcache;
 
   fn main() {
-      let r = { \$$line };
+      let r = { $$line };
       println!("{:?}", r);
   }
 EOF
-  ./\$$TMP
-  rm \$$TMP
+  ./$$TMP
+  rm $$TMP
 done
 endef
 export RUSTI_SCRIPT
