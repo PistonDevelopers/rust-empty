@@ -56,6 +56,7 @@ RLIB = target/$(TARGET)/lib/$(RLIB_FILE)
 DYLIB_FILE = $(shell (rustc --crate-type=dylib --crate-file-name "src/lib.rs" 2> /dev/null) || (echo "dummy.dylib"))
 DYLIB = target/$(TARGET)/lib/$(DYLIB_FILE)
 
+# Use 'VERBOSE=1' to echo all commands, for example 'make help VERBOSE=1'.
 ifdef VERBOSE
   Q :=
 else
