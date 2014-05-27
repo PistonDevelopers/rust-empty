@@ -119,7 +119,7 @@ The directory `target/cpu-vendor-os/lib/` is linked by default. If you put Rust 
 
 Using the command `ln -s <from> <to>`, you can link the output file from another project to the `target/cpu/vendor-os/lib/` folder.
 
-The command `make symlink-info` creates a file `.symlink-info` that contains the file name, current commit, the remote origin url and which remote branches this commit is available.
+The command `make symlink-info` creates a file `.symlink-info` that contains the file name, current commit, the remote origin url and which remote branches this commit is available. For more information about how to read '.symlink-info' files, see https://github.com/bvssvni/rust-empty/issues/114
 
 NOTICE: The `ln -s <from> <to>` for relative file names does not work on OSX. Use absolute file names instead. For example `ln -s /Users/myser/Desktop/mylibrary/target/x86_64-apple-darwin/lib/mylib.rlib target/x86_64-apple-darwin/mylib.rlib`. See https://github.com/bvssvni/rust-empty/issues/100
 
