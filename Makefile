@@ -393,6 +393,8 @@ while true; do
   extern crate native;
   extern crate num;
   extern crate rand;
+  extern crate regex;
+  #[phase(syntax)] extern crate regex_macros;
   extern crate rustc;
   extern crate rustdoc;
   extern crate rustuv;
