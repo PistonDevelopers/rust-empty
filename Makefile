@@ -66,7 +66,7 @@ endif
 all: $(DEFAULT)
 
 help:
-	$(Q)echo "--- rust-empty (0.4 000)" \
+	$(Q)echo "--- rust-empty (0.4 001)" \
 	&& echo "make run               - Runs executable" \
 	&& echo "make exe               - Builds main executable" \
 	&& echo "make lib               - Both static and dynamic library" \
@@ -94,7 +94,8 @@ help:
 	&& echo "make clean             - Deletes binaries and documentation." \
 	&& echo "make clear-project     - WARNING: Deletes project files except 'Makefile'" \
 	&& echo "make clear-git         - WARNING: Deletes Git setup" \
-	&& echo "make symlink-info      - Symlinked libraries dependency info"
+	&& echo "make symlink-info      - Symlinked libraries dependency info" \
+	&& echo "make target-dir        - Creates directory for current target"
 
 .PHONY: \
 		bench \
@@ -115,6 +116,7 @@ help:
 		rust-ci-lib \
 		rust-ci-exe \
 		symlink-info \
+		target-dir \
 		test \
 		test-internal \
 		test-external
@@ -228,6 +230,8 @@ doc: $(SOURCE_FILES) | src/
 run: exe
 	$(Q)cd bin/ \
 	&& ./main
+
+target-dir: $(TARGET_LIB_DIR)
 
 exe: bin/main | $(TARGET_LIB_DIR)
 
