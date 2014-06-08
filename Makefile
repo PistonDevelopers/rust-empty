@@ -48,7 +48,7 @@ COMPILER = rustc
 RUSTDOC = rustdoc
 
 # Extracts target from rustc.
-TARGET = $(shell rustc --version | awk "/host:/ { print \$$2 }")
+TARGET = $(shell rustc --version 2> /dev/null | awk "/host:/ { print \$$2 }")
 # TARGET = x86_64-unknown-linux-gnu
 # TARGET = x86_64-apple-darwin
 
