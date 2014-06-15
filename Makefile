@@ -213,7 +213,7 @@ rust-ci-lib: $(LIB_ENTRY_FILE)
 	) \
 	|| \
 	( \
-		echo -e "before_install:\n  - yes | sudo add-apt-repository ppa:hansjorg/rust\n  - sudo apt-get update\ninstall:\n  - sudo apt-get install rust-nightly\nscript:\n  - make lib\n" > .travis.yml \
+		echo -e "install:\n  - wget http://static.rust-lang.org/dist/rust-nightly-x86_64-unknown-linux-gnu.tar.gz -O - | sudo tar zxf - --strip-components 1 -C /usr/local\nscript:\n  - make lib\n" > .travis.yml \
 		&& echo "--- Created '.travis.yml' for library" \
 		&& cat .travis.yml \
 	)
@@ -225,7 +225,7 @@ rust-ci-exe: $(EXE_ENTRY_FILE)
 	) \
 	|| \
 	( \
-		echo -e "before_install:\n  - yes | sudo add-apt-repository ppa:hansjorg/rust\n  - sudo apt-get update\ninstall:\n  - sudo apt-get install rust-nightly\nscript:\n  - make exe\n" > .travis.yml \
+		echo -e "install:\n  - wget http://static.rust-lang.org/dist/rust-nightly-x86_64-unknown-linux-gnu.tar.gz -O - | sudo tar zxf - --strip-components 1 -C /usr/local\nscript:\n  - make exe\n" > .travis.yml \
 		&& echo "--- Created '.travis.yml' for executable" \
 		&& cat .travis.yml \
 	)
