@@ -9,7 +9,7 @@ If you want to contact me, I often hang around in the #rust IRC channel (bvssvni
 
 ##Example 1: Hello World
 
-1. Copy `Makefile` to a new empty project folder.
+1. Copy ![Makefile](https://raw.githubusercontent.com/bvssvni/rust-empty/master/Makefile) to a new empty project folder.
 2. Open the Terminal and navigate to the project folder.
 3. `make nightly-install`
 4. `make run` to create and run "hello world"
