@@ -25,6 +25,23 @@ The "hello world" example is created when there is no `src/main.rs`.
 6. `make lib`
 7. Change `DEFAULT = make help` to `DEFAULT = lib`
 
+##Example 3: Compile library on file changes
+
+1. Assuming you have set up the library and set the `DEFAULT` parameter properly
+2. `make watch` to generate the watch script
+3. `./watch.sh`
+4. Edit the source and save to do compilation
+
+##Example 4: Compile and run application on file changes
+
+1. Assuming you have set up the application properly
+2. `make watch` to generate the watch script
+3. `./watch.sh src "make run"`
+4. Edit the source and save to compile and run the application
+
+This technique can be applied to running unit tests and benchmarks as well.
+To chain commands, use the `&&` operator, for example `./watch.sh src "make test-internal && bench-internal"`.
+
 ##What is Rust-Empty?
 
 Rust-Empty is a user friendly Makefile/Bash setup tool for Rust programmers.  
@@ -34,7 +51,7 @@ The Makefile works out of the box on Linux and OSX (with developer tools).
 The setup uses best practices and conventions learned from the Rust community.  
 Pull requests/fixes are welcome!  
 
-*Latest feature: No clearing of Terminal!*
+*Latest feature: Watch script!*
 
 What are these 'best practices'?
 
