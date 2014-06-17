@@ -491,6 +491,7 @@ This script will recompile a rust project using `make`
 every time something in the specified directory changes.
 
 Use: ./watch.sh [CMD] [DIR]
+Example: ./watch.sh "make run" src
 
 CMD: Command to execute
      Complex commands may be passed as strings
