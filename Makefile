@@ -517,6 +517,7 @@ watch: $(TARGET_LIB_DIR)
 		&& chmod +x watch.sh \
 		&& echo "--- Created 'watch.sh'" \
 		&& echo "--- Type './watch.sh' to start compilation on save" \
+		&& echo "--- Type './watch.sh -h' for more options" \
 	)
 
 loc:
