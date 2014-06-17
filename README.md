@@ -88,7 +88,7 @@ For example:
 4. Type 'make help'.  
 
 ```
---- rust-empty (0.4 000)
+--- rust-empty (0.5 000)
 make run               - Runs executable
 make exe               - Builds main executable
 make lib               - Both static and dynamic library
@@ -110,6 +110,7 @@ make cargo-lib         - EXPERIMENTAL: Setup library package
 make rust-ci-lib       - Setup Travis CI Rust library
 make rust-ci-exe       - Setup Travis CI Rust executable
 make rusti             - Setup 'rusti.sh' for interactive Rust
+make watch             - Setup 'watch.sh' for compilation on save
 make loc               - Count lines of code in src folder
 make nightly-install   - Installs Rust nightly built
 make nightly-uninstall - Uninstalls Rust nightly built
@@ -117,6 +118,7 @@ make clean             - Deletes binaries and documentation.
 make clear-project     - WARNING: Deletes project files except 'Makefile'
 make clear-git         - WARNING: Deletes Git setup
 make symlink-info      - Symlinked libraries dependency info
+make target-dir        - Creates directory for current target
 ```
 
 All the commands creates the files and folders necessary to compile.  
