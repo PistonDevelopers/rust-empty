@@ -12,3 +12,5 @@ cargo-lite.conf
 *.swp
 
 Cargo.toml
+
+watch.sh

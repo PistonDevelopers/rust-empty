@@ -73,7 +73,7 @@ endif
 all: $(DEFAULT)
 
 help:
-	$(Q)echo "--- rust-empty (0.4 005)" \
+	$(Q)echo "--- rust-empty (0.4 006)" \
 	&& echo "make run               - Runs executable" \
 	&& echo "make exe               - Builds main executable" \
 	&& echo "make lib               - Both static and dynamic library" \
@@ -95,6 +95,7 @@ help:
 	&& echo "make rust-ci-lib       - Setup Travis CI Rust library" \
 	&& echo "make rust-ci-exe       - Setup Travis CI Rust executable" \
 	&& echo "make rusti             - Setup 'rusti.sh' for interactive Rust" \
+	&& echo "make watch             - Setup 'watch.sh' for compilation on save" \
 	&& echo "make loc               - Count lines of code in src folder" \
 	&& echo "make nightly-install   - Installs Rust nightly built" \
 	&& echo "make nightly-uninstall - Uninstalls Rust nightly built" \
@@ -126,7 +127,8 @@ help:
 		target-dir \
 		test \
 		test-internal \
-		test-external
+	    test-external \
+		watch
 
 nightly-install:
 	$(Q)cd ~ \
@@ -318,7 +320,7 @@ git-ignore:
 	) \
 	|| \
 	( \
-		echo -e ".DS_Store\n*~\n*#\n*.o\n*.so\n*.swp\n*.dylib\n*.dSYM\n*.dll\n*.rlib\n*.dummy\n*.exe\n*-test\n/bin/main\n/bin/test-internal\n/bin/test-external\n/doc/\n/target/\n/build/\n/.rust/\nrusti.sh\n/examples/**\n!/examples/*.rs\n!/examples/assets/" > .gitignore \
+		echo -e ".DS_Store\n*~\n*#\n*.o\n*.so\n*.swp\n*.dylib\n*.dSYM\n*.dll\n*.rlib\n*.dummy\n*.exe\n*-test\n/bin/main\n/bin/test-internal\n/bin/test-external\n/doc/\n/target/\n/build/\n/.rust/\nrusti.sh\nwatch.sh\n/examples/**\n!/examples/*.rs\n!/examples/assets/" > .gitignore \
 		&& echo "--- Created '.gitignore' for git" \
 		&& cat .gitignore \
 	)
@@ -362,8 +364,10 @@ clean:
 clear-project:
 	$(Q)rm -f ".symlink-info"
 	$(Q)rm -f "cargo-lite.conf"
+	$(Q)rm -f "Cargo.toml"
 	$(Q)rm -f ".travis.yml"
 	$(Q)rm -f "rusti.sh"
+	$(Q)rm -f "watch.sh"
 	$(Q)rm -rf "target/"
 	$(Q)rm -rf "src/"
 	$(Q)rm -rf "bin/"
@@ -442,6 +446,67 @@ rusti: $(TARGET_LIB_DIR)
 		&& chmod +x rusti.sh \
 		&& echo "--- Created 'rusti.sh'" \
 		&& echo "--- Type './rusti.sh' to start interactive Rust" \
+	)
+
+# borrowed from http://stackoverflow.com/q/649246/1256624
+define WATCH_SCRIPT
+#!/bin/bash
+
+#written by zzmp
+
+# This script will recompile a rust project using `make`
+# every time something in the specified directory changes.
+#
+# It is designed to be used in a rust-empty style crate.
+# $$1: Directory to watch
+#     src by default
+# $$2: Command to execute
+#     `make` by default
+
+# Watch files in infinite loop
+watch () {
+  if [ -e "$$1" ]; then
+    echo "Watching files in $$1.."
+    CTIME=$$(date -j -f "%a %b %d %T %Z %Y" "`date`" "+%s")
+    while :; do
+      sleep 1
+      for f in `find $$1 -type f -name "*.rs"`; do
+        eval $$(stat -s $$f)
+        if [ $$st_mtime -gt $$CTIME ]; then
+          CTIME=$$(date -j -f "%a %b %d %T %Z %Y" "`date`" "+%s")
+          echo "~~~ Rebuilding"
+          $$2
+          if [ ! $$? -eq 0 ]; then
+            echo ""
+          fi
+        fi
+      done
+    done
+  else
+    echo "$$1 is not a valid directory"
+  fi
+}
+
+# Capture user input with defaults
+DIR=$${1:-src}
+CMD=$${2:-make}
+
+watch "$$DIR" "$$CMD"
+
+endef
+export WATCH_SCRIPT
+
+watch: $(TARGET_LIB_DIR)
+	$(Q)( \
+		test -e watch.sh \
+		&& echo "--- The file 'watch.sh' already exists" \
+	) \
+	|| \
+	( \
+		echo -e "$$WATCH_SCRIPT" > watch.sh \
+		&& chmod +x watch.sh \
+		&& echo "--- Created 'watch.sh'" \
+		&& echo "--- Type './watch.sh' to start compilation on save" \
 	)
 
 loc:
