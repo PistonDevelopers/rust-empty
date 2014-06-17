@@ -485,7 +485,7 @@ watch () {
 CMD=$${1:-make}
 DIR=$${2:-src}
 
-if [ $$CMD = '-h' ]; then
+if [ $${CMD:0:2} = '-h' ]; then
 echo '
 This script will recompile a rust project using `make`
 every time something in the specified directory changes.
