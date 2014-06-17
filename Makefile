@@ -456,26 +456,20 @@ define WATCH_SCRIPT
 
 # This script will recompile a rust project using `make`
 # every time something in the specified directory changes.
-#
-# It is designed to be used in a rust-empty style crate.
-# $$1: Directory to watch
-#     src by default
-# $$2: Command to execute
-#     `make` by default
 
 # Watch files in infinite loop
 watch () {
-  if [ -e "$$1" ]; then
-    echo "Watching files in $$1.."
+  if [ -e "$$2" ]; then
+    echo "Watching files in $$2.."
     CTIME=$$(date -j -f "%a %b %d %T %Z %Y" "`date`" "+%s")
     while :; do
       sleep 1
-      for f in `find $$1 -type f -name "*.rs"`; do
+      for f in `find $$2 -type f -name "*.rs"`; do
         eval $$(stat -s $$f)
         if [ $$st_mtime -gt $$CTIME ]; then
           CTIME=$$(date -j -f "%a %b %d %T %Z %Y" "`date`" "+%s")
           echo "~~~ Rebuilding"
-          $$2
+          $$1
           if [ ! $$? -eq 0 ]; then
             echo ""
           fi
@@ -483,15 +477,31 @@ watch () {
       done
     done
   else
-    echo "$$1 is not a valid directory"
+    echo "$$2 is not a valid directory"
   fi
 }
 
 # Capture user input with defaults
-DIR=$${1:-src}
-CMD=$${2:-make}
+CMD=$${1:-make}
+DIR=$${2:-src}
 
-watch "$$DIR" "$$CMD"
+if [ $$CMD = '-h' ]; then
+echo '
+This script will recompile a rust project using `make`
+every time something in the specified directory changes.
+
+Use: ./watch.sh [CMD] [DIR]
+
+CMD: Command to execute
+     Complex commands may be passed as strings
+     `make` by default
+DIR: Directory to watch
+     src by default
+
+If DIR is supplied, CMD must be as well.\n'
+else
+  watch "$$CMD" "$$DIR"
+fi
 
 endef
 export WATCH_SCRIPT
