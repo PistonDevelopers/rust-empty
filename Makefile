@@ -73,7 +73,7 @@ endif
 all: $(DEFAULT)
 
 help:
-	$(Q)echo "--- rust-empty (0.5 000)" \
+	$(Q)echo "--- rust-empty (0.5 001)" \
 	&& echo "make run               - Runs executable" \
 	&& echo "make exe               - Builds main executable" \
 	&& echo "make lib               - Both static and dynamic library" \
@@ -459,15 +459,22 @@ define WATCH_SCRIPT
 
 # Watch files in infinite loop
 watch () {
+  UNAME=$$(uname)
   if [ -e "$$2" ]; then
     echo "Watching files in $$2.."
-    CTIME=$$(date -j -f "%a %b %d %T %Z %Y" "`date`" "+%s")
+    CTIME=$$(date "+%s")
     while :; do
       sleep 1
       for f in `find $$2 -type f -name "*.rs"`; do
-        eval $$(stat -s $$f)
+        if [[ $$UNAME == "Darwin" ]]; then
+          st_mtime=$$(stat -f "%m" "$$f")
+        elif [[ $$UNAME == "FreeBSD" ]]; then
+          st_mtime=$$(stat -f "%m" "$$f")
+        else
+          st_mtime=$$(stat -c "%Y" "$$f")
+        fi
         if [ $$st_mtime -gt $$CTIME ]; then
-          CTIME=$$(date -j -f "%a %b %d %T %Z %Y" "`date`" "+%s")
+          CTIME=$$(date "+%s")
           echo "~~~ Rebuilding"
           $$1
           if [ ! $$? -eq 0 ]; then
