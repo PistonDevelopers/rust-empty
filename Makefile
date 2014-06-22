@@ -73,7 +73,7 @@ endif
 all: $(DEFAULT)
 
 help:
-	$(Q)echo "--- rust-empty (0.5 003)"
+	$(Q)echo "--- rust-empty (0.5 004)"
 	$(Q)echo "make run               - Runs executable"
 	$(Q)echo "make exe               - Builds main executable"
 	$(Q)echo "make lib               - Both static and dynamic library"
@@ -329,7 +329,7 @@ examples: $(EXAMPLE_FILES)
 
 $(EXAMPLE_FILES): lib examples-dir
 	$(Q)$(COMPILER) --target "$(TARGET)" $(COMPILER_FLAGS) $@ -L "target/$(TARGET)/lib" --out-dir examples/ \
-	&& echo "--- Built example '$@'"
+	&& echo "--- Built '$@' (make $@)"
 
 $(EXE_ENTRY_FILE): | src/
 	$(Q)test -e $(EXE_ENTRY_FILE) \
