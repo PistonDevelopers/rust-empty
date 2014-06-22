@@ -42,6 +42,16 @@ The "hello world" example is created when there is no `src/main.rs`.
 This technique can be applied to running unit tests and benchmarks as well.
 To chain commands, use the `&&` operator, for example `./watch.sh src "make test-internal && bench-internal"`.
 
+##Example 5: Compile example with conditional compilation
+
+1. Assume you have an example 'examples/hello.rs'
+2. Put `#[cfg(foo)]` in 'hello.rs' where you want want conditional compilation
+3. Type `make examples/hello.rs COMPILER_FLAGS+="--cfg foo"`
+
+The 'foo' part can be switched with any other flag.  
+You can also have multiple flags and require more than one by using `#[cfg(foo, bar)]`.
+Type `make examples/hello.rs COMPILER_FLAGS+="--cfg foo --cfg bar"` to activate both.
+
 ##What is Rust-Empty?
 
 Rust-Empty is a user friendly Makefile/Bash setup tool for Rust programmers.  
