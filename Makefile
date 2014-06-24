@@ -73,7 +73,7 @@ endif
 all: $(DEFAULT)
 
 help:
-	$(Q)echo "--- rust-empty (0.5 004)"
+	$(Q)echo "--- rust-empty (0.5 005)"
 	$(Q)echo "make run               - Runs executable"
 	$(Q)echo "make exe               - Builds main executable"
 	$(Q)echo "make lib               - Both static and dynamic library"
@@ -189,7 +189,7 @@ cargo-exe: $(EXE_ENTRY_FILE)
 	( \
 		name=$${PWD##/*/} ; \
 		readme=$$((test -e README.md && echo -e "readme = \"README.md\"") || ("")) ; \
-		echo -e "[project]\n\nname = \"$$name\"\nversion = \"0.0\"\n$$readme\nauthors = [\"Your Name <your@email.com>\"]\ntags = []\n\n[[bin]]\n\nname = \"$$name\"\npath = \"$(EXE_ENTRY_FILE)\"\n" > Cargo.toml \
+		echo -e "[package]\n\nname = \"$$name\"\nversion = \"0.0\"\n$$readme\nauthors = [\"Your Name <your@email.com>\"]\ntags = []\n\n[[bin]]\n\nname = \"$$name\"\npath = \"$(EXE_ENTRY_FILE)\"\n" > Cargo.toml \
 		&& echo "--- Created 'Cargo.toml' for executable" \
 		&& cat Cargo.toml \
 	)
@@ -203,7 +203,7 @@ cargo-lib: $(EXE_ENTRY_FILE)
 	( \
 		name=$${PWD##/*/} ; \
 		readme=$$((test -e README.md && echo -e "readme = \"README.md\"") || ("")) ; \
-		echo -e "[project]\n\nname = \"$$name\"\nversion = \"0.0\"\n$$readme\nauthors = [\"Your Name <your@email.com>\"]\ntags = []\n\n[[lib]]\n\nname = \"$$name\"\npath = \"$(LIB_ENTRY_FILE)\"\n" > Cargo.toml \
+		echo -e "[package]\n\nname = \"$$name\"\nversion = \"0.0\"\n$$readme\nauthors = [\"Your Name <your@email.com>\"]\ntags = []\n\n[[lib]]\n\nname = \"$$name\"\npath = \"$(LIB_ENTRY_FILE)\"\n" > Cargo.toml \
 		&& echo "--- Created 'Cargo.toml' for executable" \
 		&& cat Cargo.toml \
 	)
