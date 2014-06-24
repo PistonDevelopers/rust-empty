@@ -14,3 +14,5 @@ cargo-lite.conf
 Cargo.toml
 
 watch.sh
+
+build.sh
