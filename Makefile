@@ -102,7 +102,7 @@ help:
 	$(Q)echo "make clean             - Deletes binaries and documentation."
 	$(Q)echo "make clear-project     - WARNING: Deletes project files except 'Makefile'"
 	$(Q)echo "make clear-git         - WARNING: Deletes Git setup"
-	$(Q)echo "make symlink-build     - Creates a script for building dependencies
+	$(Q)echo "make symlink-build     - Creates a script for building dependencies"
 	$(Q)echo "make symlink-info      - Symlinked libraries dependency info"
 	$(Q)echo "make target-dir        - Creates directory for current target"
 
