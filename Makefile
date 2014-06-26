@@ -73,7 +73,7 @@ endif
 all: $(DEFAULT)
 
 help:
-	$(Q)echo "--- rust-empty (0.5 008)"
+	$(Q)echo "--- rust-empty (0.6 000)"
 	$(Q)echo "make run               - Runs executable"
 	$(Q)echo "make exe               - Builds main executable"
 	$(Q)echo "make lib               - Both static and dynamic library"
@@ -90,8 +90,8 @@ help:
 	$(Q)echo "make examples          - Builds examples"
 	$(Q)echo "make cargo-lite-exe    - Setup executable package"
 	$(Q)echo "make cargo-lite-lib    - Setup library package"
-	$(Q)echo "make cargo-exe         - EXPERIMENTAL: Setup executable package"
-	$(Q)echo "make cargo-lib         - EXPERIMENTAL: Setup library package"
+	$(Q)echo "make cargo-exe         - Setup executable package"
+	$(Q)echo "make cargo-lib         - Setup library package"
 	$(Q)echo "make rust-ci-lib       - Setup Travis CI Rust library"
 	$(Q)echo "make rust-ci-exe       - Setup Travis CI Rust executable"
 	$(Q)echo "make rusti             - Setup 'rusti.sh' for interactive Rust"
