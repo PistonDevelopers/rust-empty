@@ -98,7 +98,7 @@ For example:
 4. Type 'make help'.  
 
 ```
---- rust-empty (0.5 007)
+--- rust-empty (0.5 008)
 make run               - Runs executable
 make exe               - Builds main executable
 make lib               - Both static and dynamic library
