@@ -71,7 +71,7 @@ For example:
 * Add a `crate_id` attribute for your library
 * Deny missing doc attribute for library
 * A `.gitignore` to keep repository clean
-* Library binaries should be in `target/cpu-vendor-os/lib` directory
+* Library dependencies should be in `target/deps` directory
 * Example programs better not be in the `src/` directory
 * Need a `-O` flag to compile optimized code
 * Dependencies, rust-nightly check through Travis CI etc.
@@ -143,11 +143,11 @@ External unit tests and benchmarks are located in `src/test.rs`.
 
 ##Linking to Libraries
 
-The directory `target/cpu-vendor-os/lib/` is linked by default. If you put Rust libraries in this directory it will link statically if there is an ".rlib" file or dynamically if ".dylib" (OSX), ".so" (Linux) or ".dll" (Window).
+The directory `target/deps/` is linked by default. If you put Rust libraries in this directory it will link statically if there is an ".rlib" file or dynamically if ".dylib" (OSX), ".so" (Linux) or ".dll" (Window).
 
 ##Symlinked Libraries
 
-Using the command `ln -s <from> <to>`, you can link the output file from another project to the `target/cpu/vendor-os/lib/` folder.
+Using the command `ln -s <from> <to>`, you can link the output file from another project to the `target/deps/` folder.
 
 The command `make symlink-info` creates a file `.symlink-info` that contains the file name, current commit, the remote origin url and which remote branches this commit is available. For more information about how to read '.symlink-info' files, see https://github.com/bvssvni/rust-empty/issues/114
 
