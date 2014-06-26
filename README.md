@@ -27,7 +27,7 @@ The "hello world" example is created when there is no `src/main.rs`.
 4. Copy `Makefile` to the folder.
 5. `make git-ignore`
 6. `make lib`
-7. Change `DEFAULT = make help` to `DEFAULT = lib`
+7. Change `DEFAULT = help` to `DEFAULT = lib`
 
 ##Example 3: Compile library on file changes
 
