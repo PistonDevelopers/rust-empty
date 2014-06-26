@@ -73,7 +73,7 @@ endif
 all: $(DEFAULT)
 
 help:
-	$(Q)echo "--- rust-empty (0.6 000)"
+	$(Q)echo "--- rust-empty (0.6 001)"
 	$(Q)echo "make run               - Runs executable"
 	$(Q)echo "make exe               - Builds main executable"
 	$(Q)echo "make lib               - Both static and dynamic library"
@@ -615,6 +615,9 @@ function build_deps {
     cd $$current
 }
 
+# Mark main project as visited to avoid infinite loop.
+git_dir[i]=$$(pwd)
+let i+=1
 if [ "$$1" == "deps" ]; then
     build_deps
 fi
