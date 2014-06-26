@@ -4,8 +4,12 @@ Rust-Empty
 A Makefile to get started with Rust development.  
 MIT license (or just use it as you like).  
 Requires Linux or Mac OS X (with developer tools).  
+Experimental support for Mingw on Windows.
 
 If you want to contact me, I often hang around in the #rust IRC channel (bvssvni)
+
+It is recommended to install [Cargo](https://github.com/rust-lang/cargo)  
+Cargo will replace a subset of the features of Rust-Empty over time.  
 
 ##Example 1: Hello World
 
@@ -61,7 +65,7 @@ The Makefile works out of the box on Linux and OSX (with developer tools).
 The setup uses best practices and conventions learned from the Rust community.  
 Pull requests/fixes are welcome!  
 
-*Latest feature: Watch script!*
+*Latest feature: Build symlink dependencies!*
 
 What are these 'best practices'?
 
@@ -78,17 +82,16 @@ For example:
 
 ###Goals
 
-* Work on Linux and Mac OS X
+* Work on Linux, Mac OS X and Mingw on Windows
 * Convention by 'best practice' of Rust community
 * Features are optional, non-interfering and gives informative output
 * Integrate with other tools from Rust community
 
 ###Non-Goals
 
-* Windows support
+* Replace Cargo, the Rust package manager
 * Backward compatibility
 * Require any sort of internal configuration
-* Replace other tools, such as package management
 
 ##Usage
 
@@ -147,11 +150,17 @@ The directory `target/deps/` is linked by default. If you put Rust libraries in 
 
 ##Symlinked Libraries
 
+A symlink is a file that points to another file.
+Symlinks are useful when working across multiple repositories and testing integration.
+
 Using the command `ln -s <from> <to>`, you can link the output file from another project to the `target/deps/` folder.
 
 The command `make symlink-info` creates a file `.symlink-info` that contains the file name, current commit, the remote origin url and which remote branches this commit is available. For more information about how to read '.symlink-info' files, see https://github.com/bvssvni/rust-empty/issues/114
 
 NOTICE: The `ln -s <from> <to>` for relative file names does not work on OSX. Use absolute file names instead. For example `ln -s /Users/myser/Desktop/mylibrary/target/x86_64-apple-darwin/lib/mylib.rlib target/x86_64-apple-darwin/mylib.rlib`. See https://github.com/bvssvni/rust-empty/issues/100
+
+The command `make symlink-build` creates a file `build.sh` that can build projects by symlinks.  
+You can type `./build.sh` to build just the project, or `./build.sh deps` to build everything.
 
 ##Introduction To Rust
 
