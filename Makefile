@@ -73,7 +73,7 @@ endif
 all: $(DEFAULT)
 
 help:
-	$(Q)echo "--- rust-empty (0.6 001)"
+	$(Q)echo "--- rust-empty (0.6 002)"
 	$(Q)echo "make run               - Runs executable"
 	$(Q)echo "make exe               - Builds main executable"
 	$(Q)echo "make lib               - Both static and dynamic library"
@@ -196,7 +196,7 @@ cargo-exe: $(EXE_ENTRY_FILE)
 		&& cat Cargo.toml \
 	)
 
-cargo-lib: $(EXE_ENTRY_FILE)
+cargo-lib: $(LIB_ENTRY_FILE)
 	$(Q)( \
 		test -e Cargo.toml \
 		&& echo "--- The file 'Cargo.toml' already exists" \
