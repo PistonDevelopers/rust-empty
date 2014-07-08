@@ -1,4 +1,4 @@
-# Rust-Empty: An Makefile to get started with Rust
+# Rust-Empty: A Makefile to get started with Rust
 # https://github.com/bvssvni/rust-empty
 # 
 # The MIT License (MIT)
