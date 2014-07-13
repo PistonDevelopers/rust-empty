@@ -76,7 +76,7 @@ endif
 all: $(DEFAULT)
 
 help:
-	$(Q)echo "--- rust-empty (0.6 006)"
+	$(Q)echo "--- rust-empty (0.6 007)"
 	$(Q)echo "make run               - Runs executable"
 	$(Q)echo "make exe               - Builds main executable"
 	$(Q)echo "make lib               - Both static and dynamic library"
@@ -209,7 +209,7 @@ cargo-lib: $(LIB_ENTRY_FILE)
 		name=$${PWD##/*/} ; \
 		readme=$$((test -e README.md && echo -e "readme = \"README.md\"") || ("")) ; \
 		echo -e "[package]\n\nname = \"$$name\"\nversion = \"0.0.0\"\n$$readme\nauthors = [\"Your Name <your@email.com>\"]\ntags = []\n\n[[lib]]\n\nname = \"$$name\"\npath = \"$(LIB_ENTRY_FILE)\"\n" > Cargo.toml \
-		&& echo "--- Created 'Cargo.toml' for executable" \
+		&& echo "--- Created 'Cargo.toml' for library" \
 		&& cat Cargo.toml \
 	)
 
@@ -594,6 +594,8 @@ function build_deps {
 
         # Visit the symlinks and build the dependencies
         build_deps
+        
+		echo "--- Building $$current_git_dir" \
 
         # First check for a 'build.sh' script with default settings.
         # Check for additional 'rust-empty.mk' file. \
@@ -611,10 +613,19 @@ function build_deps {
         ) \
         || \
         ( \
-            echo "--- Building $$current_git_dir" \
+			test -e Makefile \
             && $$MAKE clean \
             && $$MAKE \
-        )
+        ) \
+		|| \
+		( \
+			test -e Cargo.toml \
+			&& cargo build \
+		) \
+		|| \
+		( \
+			echo "--- ERROR: Missing Makefile in $$current_git_dir" \
+		)
     done
     cd $$current
 }
