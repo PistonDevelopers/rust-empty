@@ -116,8 +116,6 @@ make bench-external    - Benchmarks library externally
 make doc               - Builds documentation for library
 make git-ignore        - Setup files to be ignored by Git
 make examples          - Builds examples
-make cargo-lite-exe    - Setup executable package
-make cargo-lite-lib    - Setup library package
 make cargo-exe         - Setup executable package
 make cargo-lib         - Setup library package
 make rust-ci-lib       - Setup Travis CI Rust library
