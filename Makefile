@@ -91,8 +91,6 @@ help:
 	$(Q)echo "make doc               - Builds documentation for library"
 	$(Q)echo "make git-ignore        - Setup files to be ignored by Git"
 	$(Q)echo "make examples          - Builds examples"
-	$(Q)echo "make cargo-lite-exe    - Setup executable package"
-	$(Q)echo "make cargo-lite-lib    - Setup library package"
 	$(Q)echo "make cargo-exe         - Setup executable package"
 	$(Q)echo "make cargo-lib         - Setup library package"
 	$(Q)echo "make rust-ci-lib       - Setup Travis CI Rust library"
@@ -115,8 +113,6 @@ help:
 		bench-external \
 		cargo-lib \
 		cargo-exe \
-		cargo-lite-lib \
-		cargo-lite-exe \
 		clean \
 		clear-git \
 		clear-project \
@@ -159,30 +155,6 @@ nightly-uninstall:
 		then \
 			cat rustup.sh | sudo sh -s -- --uninstall ; \
 		fi \
-	)
-
-cargo-lite-exe: $(EXE_ENTRY_FILE)
-	$(Q)( \
-		test -e cargo-lite.conf \
-		&& echo "--- The file 'cargo-lite.conf' already exists" \
-	) \
-	|| \
-	( \
-		echo -e "deps = [\n]\n\n[build]\ncrate_root = \"$(EXE_ENTRY_FILE)\"\nrustc_args = []\n" > cargo-lite.conf \
-		&& echo "--- Created 'cargo-lite.conf' for executable" \
-		&& cat cargo-lite.conf \
-	)
-
-cargo-lite-lib: $(LIB_ENTRY_FILE)
-	$(Q)( \
-		test -e cargo-lite.conf \
-		&& echo "--- The file 'cargo-lite.conf' already exists" \
-	) \
-	|| \
-	( \
-		echo -e "deps = [\n]\n\n[build]\ncrate_root = \"$(LIB_ENTRY_FILE)\"\ncrate_type = \"library\"\nrustc_args = []\n" > cargo-lite.conf \
-		&& echo "--- Created 'cargo-lite.conf' for library" \
-		&& cat cargo-lite.conf \
 	)
 
 cargo-exe: $(EXE_ENTRY_FILE)
@@ -369,7 +341,6 @@ clean:
 
 clear-project:
 	$(Q)rm -f ".symlink-info"
-	$(Q)rm -f "cargo-lite.conf"
 	$(Q)rm -f "Cargo.toml"
 	$(Q)rm -f ".travis.yml"
 	$(Q)rm -f "rusti.sh"
