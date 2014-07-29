@@ -311,7 +311,8 @@ $(EXE_ENTRY_FILE): | src/
 	$(Q)test -e $(EXE_ENTRY_FILE) \
 	|| \
 	( \
-		echo -e "fn main() {\n\tprintln!(\"Hello world!\");\n}" > $(EXE_ENTRY_FILE) \
+		name=$${PWD##/*/} ; \
+		echo -e "#![crate_name = \"$$name\"]\n\nfn main() {\n\tprintln!(\"Hello world!\");\n}" > $(EXE_ENTRY_FILE) \
 	)
 
 src/test.rs: | src/
