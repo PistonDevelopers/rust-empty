@@ -325,6 +325,7 @@ clean:
 clear-project:
 	$(Q)rm -f ".symlink-info"
 	$(Q)rm -f "Cargo.toml"
+	$(Q)rm -f "Cargo.lock"
 	$(Q)rm -f ".travis.yml"
 	$(Q)rm -f "rusti.sh"
 	$(Q)rm -f "watch.sh"
