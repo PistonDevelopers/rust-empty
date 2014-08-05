@@ -64,7 +64,7 @@ DYLIB_FILE = $(shell (rustc --crate-type=dylib --crate-file-name "$(LIB_ENTRY_FI
 DYLIB = target/$(DYLIB_FILE)
 
 EXE_FILE = $(shell (rustc --crate-type=bin --print-file-name "$(EXE_ENTRY_FILE)" 2> /dev/null) || (echo "main"))
-EXE_DIR = target
+EXE_DIR = bin
 EXE = $(EXE_DIR)/$(EXE_FILE)
 
 # Use 'VERBOSE=1' to echo all commands, for example 'make help VERBOSE=1'.
@@ -77,7 +77,7 @@ endif
 all: $(DEFAULT)
 
 help:
-	$(Q)echo "--- rust-empty (0.7 002)"
+	$(Q)echo "--- rust-empty (0.7 003)"
 	$(Q)echo "make run               - Runs executable"
 	$(Q)echo "make exe               - Builds main executable"
 	$(Q)echo "make lib               - Both static and dynamic library"
