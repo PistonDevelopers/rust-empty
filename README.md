@@ -13,7 +13,7 @@ Cargo will replace a subset of the features of Rust-Empty over time.
 
 ##Example 1: Hello World
 
-1. Copy ![Makefile](https://raw.githubusercontent.com/bvssvni/rust-empty/master/Makefile) to a new empty project folder.
+1. Copy [Makefile](https://raw.githubusercontent.com/bvssvni/rust-empty/master/Makefile) to a new empty project folder.
 2. Open the Terminal and navigate to the project folder.
 3. `make nightly-install`
 4. `make run` to create and run "hello world"
