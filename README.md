@@ -1,6 +1,8 @@
 Rust-Empty
 ==========
 
+*Notice: Rust-Empty is deprecated and replaced by Cargo, which comes with Rust*
+
 A Makefile to get started with Rust development.  
 MIT license (or just use it as you like).  
 Requires Linux or Mac OS X (with developer tools).  
