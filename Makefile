@@ -130,7 +130,7 @@ nightly-install:
 		echo "" ; \
 		if [[ $$REPLY =~ ^[Yy]$$ ]] ; \
 		then \
-			cat rustup.sh | sudo sh ; \
+			cat rustup.sh | sudo sh -s -- --channel=nightly; \
 		fi \
 	)
 
