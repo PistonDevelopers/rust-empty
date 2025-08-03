@@ -51,7 +51,7 @@ To chain commands, use the `&&` operator, for example `./watch.sh src "make test
 ##Example 5: Compile example with conditional compilation
 
 1. Assume you have an example 'examples/hello.rs'
-2. Put `#[cfg(foo)]` in 'hello.rs' where you want want conditional compilation
+2. Put `#[cfg(foo)]` in 'hello.rs' where you want conditional compilation
 3. Type `make examples/hello.rs COMPILER_FLAGS+="--cfg foo"`
 
 The 'foo' part can be switched with any other flag.  
